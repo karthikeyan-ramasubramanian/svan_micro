@@ -5,25 +5,27 @@
   <!-- Left side column. contains the logo and sidebar -->
 <?php include("include/side_bar.php"); ?>
   <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    
+  <div class="content-wrapper">
+    <?php 
+   $code = $_GET['id'];
+    ?>
 	<!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Register New Customer
+        List of Members
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"> <a href="customer.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("410"); ?>">Customer</a></li>
+        <li><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"> <a href="listborrowers.php?id=<?php echo $_SESSION['tid']; ?>">Borrowers</a></li>
         <li class="active">Add</li>
       </ol>
     </section>
 	
+	
     <section class="content">
-		<?php 
-    include("include/addcustomer_data.php"); ?>
+		<?php include("include/members_data.php"); ?>
 	</section>
-</div>
+</div>	
 
 <?php include("include/footer.php"); ?>

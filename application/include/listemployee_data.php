@@ -8,7 +8,7 @@
 			 <a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><button type="button" class="btn btn-flat btn-warning"><i class="fa fa-mail-reply-all"></i>&nbsp;Back</button> </a> 
 	 <button type="submit" class="btn btn-flat btn-danger" name="delete"><i class="fa fa-times"></i>&nbsp;Delete</button>
 	<a href="newemployee.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("409"); ?>"><button type="button" class="btn btn-flat btn-info"><i class="fa fa-user"></i>&nbsp;New Employee</button></a>
-	<a href="send_sms.php?id=<?php echo $_SESSION['tid']; ?>"><button type="button" class="btn btn-flat btn-info"><i class="fa fa-envelope-o"></i>&nbsp;Send SMS</button></a>
+	
 	
 	<a href="printemp.php" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-print"></i>&nbsp;Print Reports</a>
 	<a href="excelemp.php" target="_blank" class="btn btn-success btn-flat"><i class="fa fa-send"></i>&nbsp;Export Excel</a>

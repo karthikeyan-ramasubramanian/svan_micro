@@ -191,40 +191,6 @@ else{
 }
 ?>
 		
-<?php
-$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Internal Message'") or die ("Error" . mysqli_error($link));
-$get_check = mysqli_fetch_array($check);
-$pcreate = $get_check['pcreate'];
-$pread = $get_check['pread'];
-if($pcreate == '1' || $pread == '1')
-{
-?>
-		<div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
- 			
-			<h4>
-<?php
-$select = mysqli_query($link, "SELECT * FROM message") or die (mysqli_error($link));
-$num = mysqli_num_rows($select);
-echo $num;
-?>
-			</h4>
-              <p>Messages</p>
-            </div>
-            <div class="icon"><img height="80" width="80" src="../img/message.png">
-              <i class=""></i>
-            </div>
-            <?php echo ($pread == 1) ? '<a href="inboxmessage.php?tid='.$_SESSION['tid'].'&&mid='.base64_encode("406").'" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>' : '<a href="#" class="small-box-footer">-------</a>'; ?>
-          </div>
-        </div>
-<?php
-}
-else{
-	echo '';
-}
-?>
 	
 <?php
 $check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Missed Payment'") or die ("Error" . mysqli_error($link));
@@ -436,26 +402,6 @@ else{
 		<!--  Event codes starts here-->
 	
 		 
-	        <div class="box box-info">
-<?php
-$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Loan Details'") or die ("Error" . mysqli_error($link));
-$get_check = mysqli_fetch_array($check);
-$pcreate = $get_check['pcreate'];
-$pread = $get_check['pread'];
-if($pcreate == '1' || $pread == '1')
-{
-?>
-            <div class="box-body">
-			<div class="alert alert-info" align="center" class="style2" style="color: #FF0000">LOAN INFORMATION CHART</div>
-             
-			   <div id="chartdiv"></div>	              
-			</div>
-<?php
-}
-else{
-	echo '';
-}
-?>			
        
 </div>	
 </div>	

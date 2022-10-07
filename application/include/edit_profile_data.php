@@ -91,7 +91,7 @@
 
 			 <?php echo '<div class="alert alert-info fade in" >
 			  <a href = "#" class = "close" data-dismiss= "alert"> &times;</a>
-  				<strong>Note that&nbsp;</strong> &nbsp;&nbsp;Some Fields are Rquired.
+  				<strong>Note that&nbsp;</strong> &nbsp;&nbsp;Some Fields are Required.
 				</div>'?>
              <div class="box-body">
 				

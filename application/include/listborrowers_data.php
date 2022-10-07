@@ -23,7 +23,7 @@ $check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESS
 while($get_check = mysqli_fetch_array($check)){
 $pcreate = $get_check['pcreate'];
 ?>
-	<?php echo ($pcreate == '1') ? '<a href="send_smsloan.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("406").'"><button type="button" class="btn btn-flat btn-info"><i class="fa fa-envelope"></i>&nbsp;Send SMS</button></a>' : ''; ?>
+	
 <?php } ?>
 	<a href="printborrow.php" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-print"></i>&nbsp;Print</a>
 	<a href="borrowexcel.php" target="_blank" class="btn btn-success btn-flat"><i class="fa fa-send"></i>&nbsp;Export Excel</a>

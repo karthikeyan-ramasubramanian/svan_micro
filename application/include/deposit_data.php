@@ -73,16 +73,7 @@ if(isset($_POST['save']))
 			echo "<div class='alert alert-info'>Unable to Process Transaction.....Please try again later</div>";
 			}
 			else{
-				$sql_alert = mysqli_query($link, "SELECT * FROM sms") or die (mysqli_error($link));
-				$find_alert = mysqli_fetch_array($sql_alert);
-				$status = $find_alert['status'];
-				if($status == "NotActivated")
-				{
-					echo "";
-				}
-				else{
-				include("alert_sender/deposit_alert.php");
-				}
+				
 				echo "<div class='alert alert-success'>Amount Deposited Successfully!</div>";
 				}
 			}

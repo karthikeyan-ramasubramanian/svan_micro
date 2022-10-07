@@ -36,40 +36,16 @@
 if(isset($_GET['mid']) && (trim($_GET['mid']) == base64_encode("401")))
 {
 ?>
-		<li class="active"><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><i class="fa fa-dashboard"></i> <span>Dashbord</span></a></li>
+		<li class="active"><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 <?php
 }
 else{
 	?>
-		<li><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><i class="fa fa-dashboard"></i> <span>Dashbord</span></a></li>
+		<li><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 <?php } ?>
 		
 		
-<?php
-if(isset($_GET['mid']) && (trim($_GET['mid']) == base64_encode("402")))
-{
-$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Email Panel'") or die ("Error" . mysqli_error($link));
-$get_check = mysqli_fetch_array($check);
-$pcreate = $get_check['pcreate'];
-$pread = $get_check['pread'];
-?>
-		<?php echo ($pcreate == 1) ? '<li class="treeview active"><a href="#"><i class="fa fa-book"></i> <span>Email Panel</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">' : ''; ?>
- 		<?php echo ($pcreate == 1) ? '<li class="active"><a href="newemail.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("402").'"><i class="fa fa-circle-o"></i> Send Email</a></li>' : ''; ?>
-        <?php echo ($pread == 1) ? '<li><a href="listemail.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("402").'"><i class="fa fa-circle-o"></i>List Email</a></li>' : ''; ?>
-        <?php echo ($pcreate == 1) ? '</ul></li>' : ''; ?>
-<?php
-}
-else{
-$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Email Panel'") or die ("Error" . mysqli_error($link));
-$get_check = mysqli_fetch_array($check);
-$pcreate = $get_check['pcreate'];
-$pread = $get_check['pread'];
-	?>	
-		<?php echo ($pcreate == 1) ? '<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Email Panel</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">' : ''; ?>
- 		<?php echo ($pcreate == 1) ? '<li class="active"><a href="newemail.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("402").'"><i class="fa fa-circle-o"></i> Send Email</a></li>' : ''; ?>
-        <?php echo ($pread == 1) ? '<li><a href="listemail.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("402").'"><i class="fa fa-circle-o"></i>List Email</a></li>' : ''; ?>
-        <?php echo ($pcreate == 1) ? '</ul></li>' : ''; ?>
-<?php } ?>
+
 		
 
 <?php
@@ -97,6 +73,51 @@ $pread = $get_check['pread'];
         <?php echo ($pread == 1) ? '<li><a href="listborrowers.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("403").'"><i class="fa fa-circle-o"></i>List Borrowers</a></li>' : ''; ?>
         <?php echo ($pcreate == 1) ? '</ul></li>' : ''; ?> 
 <?php } ?>		
+
+<!-- borrowergroup -->
+<?php
+if(isset($_GET['mid']) && (trim($_GET['mid']) == base64_encode("407")))
+{
+$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Borrower group'") or die ("Error" . mysqli_error($link));
+$get_check = mysqli_fetch_array($check);
+$pread = $get_check['pread'];
+?>		
+		<?php echo ($pread == 1) ? '<li class="active"><a href="borrowergrp.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("407").'"><i class="fa fa-users"></i> <span>Customer Groups</span></a></li>' : ''; ?>	
+<?php
+}
+else{
+$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Borrower Group'") or die ("Error" . mysqli_error($link));
+$get_check = mysqli_fetch_array($check);
+$pread = $get_check['pread'];
+?>		
+		<?php echo ($pread == 1) ? '<li><a href="borrowergrp.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("407").'"><i class="fa fa-users"></i> <span>Customer Group</span></a></li>' : ''; ?>	
+<?php } ?>
+
+<!-- borrowergroup end -->
+<!-- customers -->
+<?php
+if(isset($_GET['mid']) && (trim($_GET['mid']) == base64_encode("407")))
+{
+	$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Savings Account'") or die ("Error" . mysqli_error($link));
+	$get_check = mysqli_fetch_array($check);
+	$pcreate = $get_check['pcreate'];
+	$pread = $get_check['pread'];
+?>		
+		<?php echo ($pread == 1) ? '<li><a href="customer.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-users"></i>Customers</a></li>' : ''; ?> 	
+<?php
+}
+else{
+	$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Savings Account'") or die ("Error" . mysqli_error($link));
+	$get_check = mysqli_fetch_array($check);
+	$pcreate = $get_check['pcreate'];
+	$pread = $get_check['pread'];
+?>		
+		<?php echo ($pread == 1) ? '<li><a href="customer.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-users"></i>Customers</a></li>' : ''; ?> 
+<?php } ?>
+
+<!-- customers end -->
+
+
 	
 
 <?php
@@ -145,33 +166,7 @@ $pread = $get_check['pread'];
 <?php } ?>
 		
 	
-<?php
-if(isset($_GET['mid']) && (trim($_GET['mid']) == base64_encode("406")))
-{
-$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Internal Message'") or die ("Error" . mysqli_error($link));
-$get_check = mysqli_fetch_array($check);
-$pcreate = $get_check['pcreate'];
-$pread = $get_check['pread'];
-?>		
-		<?php echo ($pcreate == 1) ? '<li class="treeview active"><a href="#"><i class="fa fa-book"></i> <span>Message</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">' : ''; ?>
- 		<?php echo ($pcreate == 1) ? '<li class="active"><a href="newmessage.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("406").'"><i class="fa fa-circle-o"></i> New Message</a></li>' : ''; ?>
-        <?php echo ($pread == 1) ? '<li><a href="inboxmessage.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("406").'"><i class="fa fa-circle-o"></i>Inbox Message</a></li>' : ''; ?>
-        <?php echo ($pread == 1) ? '<li><a href="outboxmessage.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("406").'"><i class="fa fa-circle-o"></i>Outbox Message</a></li>' : ''; ?>
-        <?php echo ($pcreate == 1) ? '</ul></li>' : ''; ?>
-<?php
-}
-else{
-$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Internal Message'") or die ("Error" . mysqli_error($link));
-$get_check = mysqli_fetch_array($check);
-$pcreate = $get_check['pcreate'];
-$pread = $get_check['pread'];
-?>		
-		<?php echo ($pcreate == 1) ? '<li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Message</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">' : ''; ?>
- 		<?php echo ($pcreate == 1) ? '<li class="active"><a href="newmessage.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("406").'"><i class="fa fa-circle-o"></i> New Message</a></li>' : ''; ?>
-        <?php echo ($pread == 1) ? '<li><a href="inboxmessage.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("406").'"><i class="fa fa-circle-o"></i>Inbox Message</a></li>' : ''; ?>
-        <?php echo ($pread == 1) ? '<li><a href="outboxmessage.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("406").'"><i class="fa fa-circle-o"></i>Outbox Message</a></li>' : ''; ?>
-        <?php echo ($pcreate == 1) ? '</ul></li>' : ''; ?>
-<?php } ?>
+
 		
 
 <?php
@@ -315,7 +310,7 @@ $pread = $get_check['pread'];
 ?>		
 		<?php echo ($pcreate == 1) ? '<li class="treeview active"><a href="#"><i class="fa fa-gear"></i> <span>General Settings</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">' : ''; ?>
 		<?php echo ($pcreate == 1) ? '<li><a href="system_set.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("411").'"><i class="fa fa-circle-o"></i>Company Setup</a></li>' : ''; ?>
-		<?php echo ($pcreate == 1) ? '<li><a href="sms.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("411").'"><i class="fa fa-circle-o"></i>SMS Gateway Settings</a></li>' : ''; ?>
+		
 		<?php echo ($pread == 1) ? '<li><a href="backupdatabase.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("411").'"><i class="fa fa-circle-o"></i>Backup Database</a></li>' : ''; ?>
         <?php echo ($pcreate == 1) ? '</ul></li>' : ''; ?>
 <?php
@@ -328,7 +323,7 @@ $pread = $get_check['pread'];
 ?>		
 		<?php echo ($pcreate == 1) ? '<li class="treeview"><a href="#"><i class="fa fa-gear"></i> <span>General Settings</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">' : ''; ?>
 		<?php echo ($pcreate == 1) ? '<li><a href="system_set.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("411").'"><i class="fa fa-circle-o"></i>Company Setup</a></li>' : ''; ?>
-		<?php echo ($pcreate == 1) ? '<li><a href="sms.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("411").'"><i class="fa fa-circle-o"></i>SMS Gateway Settings</a></li>' : ''; ?>
+		
 		<?php echo ($pread == 1) ? '<li><a href="backupdatabase.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("411").'"><i class="fa fa-circle-o"></i>Backup Database</a></li>' : ''; ?>
         <?php echo ($pcreate == 1) ? '</ul></li>' : ''; ?>
 <?php } ?>

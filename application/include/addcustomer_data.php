@@ -9,62 +9,131 @@
  <?php
 if(isset($_POST['save']))
 {
-$fname =  mysqli_real_escape_string($link, $_POST['fname']);
-$lname = mysqli_real_escape_string($link, $_POST['lname']);
-$email = mysqli_real_escape_string($link, $_POST['email']);
-$phone = mysqli_real_escape_string($link, $_POST['phone']);
-$addrs1 = mysqli_real_escape_string($link, $_POST['addrs1']);
-$addrs2 = mysqli_real_escape_string($link, $_POST['addrs2']);
-$city = mysqli_real_escape_string($link, $_POST['city']);
-$state = mysqli_real_escape_string($link, $_POST['state']);
-$zip = mysqli_real_escape_string($link, $_POST['zip']);
-$country = mysqli_real_escape_string($link, $_POST['country']);
-$account = mysqli_real_escape_string($link, $_POST['account']);
-$status = "Completed";
+	$group_code =  mysqli_real_escape_string($link, $_POST['bankcode']);
+	$account = $group_code.mt_rand(100000,1000000);
+//	echo"<script>alert('Customer Account number is $account')</script>";
+	$fname =  mysqli_real_escape_string($link, $_POST['fname']);
+	$lname = mysqli_real_escape_string($link, $_POST['lname']);
+	$email = mysqli_real_escape_string($link, $_POST['email']);
+	$phone = mysqli_real_escape_string($link, $_POST['phone']);
+	$bank_account = mysqli_real_escape_string($link, $_POST['bank_account']);
+	$nominee = mysqli_real_escape_string($link, $_POST['nominee']);
+	$nominee_ph = mysqli_real_escape_string($link, $_POST['nominee_ph']);
+	$aadhaar_number = mysqli_real_escape_string($link, $_POST['aadhaar_number']);
+	$kic_number = mysqli_real_escape_string($link, $_POST['kic_number']);
+	$addrs1 = mysqli_real_escape_string($link, $_POST['addrs1']);
+	$addrs2 = mysqli_real_escape_string($link, $_POST['addrs2']);
+	$city = mysqli_real_escape_string($link, $_POST['city']);
+	$state = mysqli_real_escape_string($link, $_POST['state']);
+	$zip = mysqli_real_escape_string($link, $_POST['zip']);
+	$country = mysqli_real_escape_string($link, $_POST['country']);
+	$account = mysqli_real_escape_string($link, $account);
+	$status = "Completed";
 
-$target_dir = "../img/";
-$target_file = $target_dir.basename($_FILES["image"]["name"]);
-$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-$check = getimagesize($_FILES["image"]["tmp_name"]);
+	$target_dir = "../img/";
+	$target_file = $target_dir.basename($_FILES["image"]["name"]);
+	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	$check = getimagesize($_FILES["image"]["tmp_name"]);
+	//Check if a value exists in a table
+	// $table = "borrowers";
+	// $column1 = "email";
+	// $column2 = "phone";
+	// $column3 = "account";
+	// $column4 = "bank_account";
+
+	// $value1 = $email;
+	// $value2 = $phone;
+	// $value3 = $account;
+	// $value4 = $bank_account;
+
+	// $mailcheck = mysqli_query($link, "SELECT * FROM {$table} WHERE {$column1} = {$value1}");
+	// $phonecheck = mysqli_query($link,"SELECT * FROM {$table} WHERE {$column2} = {$value2}");
+	// $accountcheck = mysqli_query($link, "SELECT * FROM {$table} WHERE {$column3} = {$value3}");
+	// $bank_accountcheck = mysqli_query($link,"SELECT * FROM {$table} WHERE {$column4} = {$value4}");
+	$sql1 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE email='.$email.'");
+	$sql1 = mysqli_fetch_assoc($sql1);
+	echo $sql1['email'];
+	$Checker1 = $sql1['email'];
+	$sql2 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE phone='.$phone.'");
+	$sql2 = mysqli_fetch_assoc($sql2);
+	echo $sql2['phone'];
+	$Checker2 = $sql2['phone'];
+	$sql3 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE account='.$account.'");
+	$sql3 = mysqli_fetch_assoc($sql3);
+	echo $sql3['account'];
+	$Checker3 = $sql3['account'];
+	$sql4 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE bank_account='.$bank_account.'");
+	$sql4 = mysqli_fetch_assoc($sql4);
 	
-if($check == false)
-{
-	echo "<p style='font-size:24px; color:#FF0000'>Invalid file type</p>";
-}
-elseif(file_exists($target_file)) 
-{
-	echo "<p style='font-size:24px; color:#FF0000'>Already exists.</p>";
-}
-elseif($_FILES["image"]["size"] > 500000)
-{
-	echo "<p style='font-size:24px; color:#FF0000'>Image must not more than 500KB!</p>";
-}
-elseif($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif")
-{
-	echo "<p style='font-size:24px; color:#FF0000'>Sorry, only JPG, JPEG, PNG & GIF Files are allowed.</p>";
-}
-else{
-	$sourcepath = $_FILES["image"]["tmp_name"];
-	$targetpath = "../img/" . $_FILES["image"]["name"];
-	move_uploaded_file($sourcepath,$targetpath);
+	$Checker4 = $sql4['bank_account'];
 
-	$location = "img/".$_FILES['image']['name'];
-
-	$insert = mysqli_query($link, "INSERT INTO borrowers VALUES('','$fname','$lname','$email','$phone','$addrs1','$addrs2','$city','$state','$zip','$country','','$account','0.0','$location',NOW(),'$status')") or die (mysqli_error($link));
-	if(!$insert)
+    
+		
+	if($check == false)
 	{
-		echo "<div class='alert alert-info'>Unable to Insert Borrower Records.....Please try again later</div>";
+		echo "<div class='alert alert-warning'>Invalid file type!</div>";
+	}
+	elseif($Checker1 != null)
+	
+	{
+		echo "<div class='alert alert-warning'>This email address is already exists!</div>";
+	}
+	elseif($Checker2 != null) 
+	{
+		
+		echo "<div class='alert alert-warning'>This phone number is already used!</div>";
+	}
+	elseif($Checker3 != null) 
+	{
+		
+		echo "<div class='alert alert-warning'>This SVAN account number is already exists!</div>";
+	}
+	elseif($Checker4 != null) 
+	{
+		
+		echo "<div class='alert alert-warning'>This bank account number is already exists!</div>";
+	}
+	
+	elseif(strlen($aadhaar_number) != 12)
+	{
+		echo "<p style='font-size:24px; color:#FF0000'>Aadhaar number must be 12 digits</p>";
+	}
+	elseif(file_exists($target_file)) 
+	{
+		echo "<p style='font-size:24px; color:#FF0000'>Already exists.</p>";
+	}
+	
+	elseif($_FILES["image"]["size"] > 500000)
+	{
+		echo "<p style='font-size:24px; color:#FF0000'>Image must not more than 500KB!</p>";
+	}
+	elseif($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif")
+	{
+		echo "<p style='font-size:24px; color:#FF0000'>Sorry, only JPG, JPEG, PNG & GIF Files are allowed.</p>";
 	}
 	else{
-		echo "<div class='alert alert-success'>New Customer Added Successfully!</div>";
+		$sourcepath = $_FILES["image"]["tmp_name"];
+		$targetpath = "../img/" . $_FILES["image"]["name"];
+		move_uploaded_file($sourcepath,$targetpath);
+
+		$location = "img/".$_FILES['image']['name'];
+
+		$insert = mysqli_query($link, "INSERT INTO borrowers VALUES('','$fname','$lname','$email','$phone','$bank_account','$nominee','$nominee_ph','$aadhaar_number','$kic_number','$addrs1','$addrs2','$city','$state','$zip','$country','','$account','0.0','$location',NOW(),'$status')") or die (mysqli_error($link));
+		if(!$insert)
+		{
+			echo "<div class='alert alert-info'>Unable to Insert Borrower Records.....Please try again later</div>";
+		}
+		else{
+			echo "<div class='alert alert-success'>New Customer Added Successfully!</div>";
+			echo "<div class='alert alert-success'>Customer Account number is $account</div>";
+		}
 	}
-}
 }
 ?>           
 			 <form class="form-horizontal" method="post" enctype="multipart/form-data">
 			  <?php echo '<div class="alert alert-info fade in" >
 			  <a href = "#" class = "close" data-dismiss= "alert"> &times;</a>
-  				<strong>Note that&nbsp;</strong> &nbsp;&nbsp;Some Fields are Rquired.
+  				<strong>Note that&nbsp;</strong> &nbsp;&nbsp;Some Fields are Required.
 				</div>'?>
              <div class="box-body">
 				
@@ -75,16 +144,46 @@ else{
        				 <img id="blah"  src="../avtar/user2.png" alt="Image Here" height="100" width="100"/>
 			</div>
 			</div>
+			<div class="form-group">
+                 
+                  <label for="" class="col-sm-2 control-label" style="color:#009900">Group Name</label>
+                  <div class="col-sm-10">
+                  <?php
+                    $link = mysqli_connect('localhost','root','','loan') or die('Unable to Connect to Database');
+                    $query = "SELECT * FROM `tbl_bgroup` WHERE 1";
+                    $stmt = mysqli_query($link,$query);
+                    $count = $stmt->num_rows;
+                    ?>
+                    <select class="form-control input-sm" name="bankcode">
+                    <?php
+                    if($count==0)
+                    {
+                        echo '<option value="">No Datas have been created Yet</option>';
+                    }
+                    else
+                    {
+                        while($fetch = $stmt->fetch_assoc())
+                        {
+                        ?>
+                        <option value="<?php echo $fetch['group_code']; ?>"><?php echo $fetch['group_name']; ?></option>
+                        <?php   
+                        }
+                    }
+                    ?>
+                    </select>
+                  </div>
+                  </div>
+		
 			
-			 <div class="form-group">
+			 <!-- <div class="form-group">
                   <label for="" class="col-sm-2 control-label" style="color:#009900">Account Number</label>
                   <div class="col-sm-10">
 <?php
-$account = '013'.rand(1000000,10000000);
+//$account = $bankcode.rand(100000,1000000);
 ?>
-                  <input name="account" type="text" class="form-control" value="<?php echo $account; ?>" placeholder="Account Number" readonly>
+                  <input name="account" type="text" class="form-control" value="<?php// echo $account; ?>" placeholder="Account Number" readonly>
                   </div>
-                  </div>
+                  </div> -->
 			
 			<div class="form-group">
                   <label for="" class="col-sm-2 control-label" style="color:#009900">First Name</label>
@@ -114,7 +213,37 @@ $account = '013'.rand(1000000,10000000);
                   </div>
                   </div>
 				  
-				  
+				  <div class="form-group">
+                  <label for="" class="col-sm-2 control-label" style="color:#009900">Bank Account</label>
+                  <div class="col-sm-10">
+                  <input name="bank_account" type="text" class="form-control" placeholder="Enter your Bank Account Number"required >
+                  </div>
+                  </div>
+
+			<div class="form-group">
+                  <label for="" class="col-sm-2 control-label" style="color:#009900">Nominee Name</label>
+                  <div class="col-sm-10">
+                  <input name="nominee" type="text" class="form-control" placeholder="Enter Nominee Name"required >
+                  </div>
+                  </div>
+		    <div class="form-group">
+                  <label for="" class="col-sm-2 control-label" style="color:#009900">Nominee Phone.No</label>
+                  <div class="col-sm-10">
+                  <input name="nominee_ph" type="text" class="form-control" placeholder="Enter Nominee Phone Number"required >
+                  </div>
+                  </div>
+			<div class="form-group">
+                  <label for="" class="col-sm-2 control-label" style="color:#009900">Aadhaar Number</label>
+                  <div class="col-sm-10">
+                  <input name="aadhaar_number" type="text" class="form-control" placeholder="Enter your Aadhaar Number"required >
+                  </div>
+                  </div>
+			<div class="form-group">
+                  <label for="" class="col-sm-2 control-label" style="color:#009900">KIC Number</label>
+                  <div class="col-sm-10">
+                  <input name="kic_number" type="number" class="form-control" placeholder="Enter KIC Number"required >
+                  </div>
+                  </div>		  
 		 <div class="form-group">
                   	<label for="" class="col-sm-2 control-label" style="color:#009900">Address 1</label>
                   	<div class="col-sm-10"><textarea name="addrs1"  class="form-control" rows="4" cols="80"></textarea></div>
@@ -126,17 +255,17 @@ $account = '013'.rand(1000000,10000000);
           	</div>
 			
 			
-			<div class="form-group">
+				  
+			  <div class="form-group">
                   <label for="" class="col-sm-2 control-label" style="color:#009900">City</label>
                   <div class="col-sm-10">
-                  <input name="city" type="text" class="form-control" placeholder="City"required >
+                  <input name="city" type="text" class="form-control" placeholder="city" value="Nagapattinam" required>
                   </div>
-                  </div>
-				  
+                  </div>	  
 		<div class="form-group">
                   <label for="" class="col-sm-2 control-label" style="color:#009900">State</label>
                   <div class="col-sm-10">
-                  <input name="state" type="text" class="form-control" placeholder="State" required>
+                  <input name="state" type="text" class="form-control" placeholder="State" value="TamilNadu" required>
                   </div>
                   </div>
 				  
@@ -148,7 +277,7 @@ $account = '013'.rand(1000000,10000000);
                   </div>
 				  
 		<div class="form-group">
-                  <label for="" class="col-sm-2 control-label" style="color:#009900">State</label>
+                  <label for="" class="col-sm-2 control-label" style="color:#009900">Country</label>
                   <div class="col-sm-10">
 				<select name="country"  class="form-control" required>
 										<option value="">Select a country&hellip;</option>
@@ -252,7 +381,7 @@ $account = '013'.rand(1000000,10000000);
 										<option value="HK">Hong Kong</option>
 										<option value="HU">Hungary</option>
 										<option value="IS">Iceland</option>
-										<option value="IN">India</option>
+										<option value="IN" selected='selected'>India</option>
 										<option value="ID">Indonesia</option>
 										<option value="IR">Iran</option>
 										<option value="IQ">Iraq</option>
@@ -383,7 +512,7 @@ $account = '013'.rand(1000000,10000000);
 										<option value="UA">Ukraine</option>
 										<option value="AE">United Arab Emirates</option>
 										<option value="GB">United Kingdom (UK)</option>
-										<option value="US" selected='selected'>United States (US)</option>
+										<option value="US">United States (US)</option>
 										<option value="UY">Uruguay</option>
 										<option value="UZ">Uzbekistan</option>
 										<option value="VU">Vanuatu</option>

@@ -11,7 +11,7 @@
 	 <button type="submit" class="btn btn-flat btn-danger" name="delete"><i class="fa fa-times"></i>&nbsp;Multiple Delete</button>
 	<a href="deposit.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("410"); ?>"><button type="button" class="btn btn-flat btn-success"><i class="fa fa-plus"></i>&nbsp;Make Deposit</button></a>
 	<a href="withdraw.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("410"); ?>"><button type="button" class="btn btn-flat btn-success"><i class="fa fa-plus"></i>&nbsp;Withdraw Money</button></a>
-
+	
 
 	<a href="printtransaction.php" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-print"></i>&nbsp;Print</a>
 	<a href="transactionexcel.php" target="_blank" class="btn btn-success btn-flat"><i class="fa fa-send"></i>&nbsp;Export Excel</a>
@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
 <?php
-$select = mysqli_query($link, "SELECT * FROM transaction") or die (mysqli_error($link));
+$select = mysqli_query($link, "SELECT * FROM transaction Where acctno = '$acc'") or die (mysqli_error($link));
 if(mysqli_num_rows($select)==0)
 {
 echo "<div class='alert alert-info'>No data found yet!.....Check back later!!</div>";

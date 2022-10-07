@@ -7,7 +7,7 @@
               <div class="table-responsive">
              <div class="box-body">
 <form method="post">
-			 <a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><button type="button" class="btn btn-flat btn-warning"><i class="fa fa-mail-reply-all"></i>&nbsp;Back</button> </a> 
+<a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><button type="button" class="btn btn-flat btn-warning"><i class="fa fa-mail-reply-all"></i>&nbsp;Back</button> </a> 
 	 <button type="submit" class="btn btn-flat btn-danger" name="delete"><i class="fa fa-times"></i>&nbsp;Multiple Delete</button>
 	<a href="addcustomer.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("410"); ?>"><button type="button" class="btn btn-flat btn-success"><i class="fa fa-plus"></i>&nbsp;Add Customer</button></a>
 	
@@ -24,18 +24,24 @@
                   <th><input type="checkbox" id="select_all"/></th>
                   <th>ID</th>
                   <th>Image</th>
-				  <th>Account No.</th>
                   <th>First Name</th>
 				  <th>Last Name</th>
                   <th>Email</th>
                   <th>Mobile Number</th>
-                  <th>Balance</th>
+				  <th>Bank Account</th>
+				  <th>SVAN Account</th>
+				  <th>Nominee Name</th>
+				  <th>Nominee Phone.No</th>
+				  <th>Aadhaar Number</th>
+				  <th>KIC Number</th>
+				  <th>Address1</th>
+				  <th>Address2</th>
                   <th>Actions</th>
                  </tr>
                 </thead>
                 <tbody>
 <?php
-$select = mysqli_query($link, "SELECT * FROM borrowers") or die (mysqli_error($link));
+$select = mysqli_query($link, "SELECT * FROM borrowers WHERE account LIKE '{$code}%'") or die (mysqli_error($link));
 if(mysqli_num_rows($select)==0)
 {
 echo "<div class='alert alert-info'>No data found yet!.....Check back later!!</div>";
@@ -44,30 +50,49 @@ else{
 while($row = mysqli_fetch_array($select))
 {
 $id = $row['id'];
-$acctno = $row['account'];
 $lname = $row['lname'];
 $fname = $row['fname'];
 $email = $row['email'];
 $phone = $row['phone'];
-$bal = $row['balance'];
-$image = $row['image'];
+$bank_acc = $row['bank_account'];
+$acc = $row['account'];
+$nominee = $row['nominee'];
+$nominee_ph = $row['nominee_ph'];
+$aadhaar = $row['aadhaar_number'];
+$kic_no = $row['kic_number'];
+$address1 = $row['addrs1'];
+$address2 = $row['addrs2'];
+
+$status = $row['status'];
+
+//$image = $row['image'];
+$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Borrower Details'") or die ("Error" . mysqli_error($link));
+$get_check = mysqli_fetch_array($check);
+$pupdate = $get_check['pupdate'];
+$pread= $get_check['pread'];
 ?>    
                 <tr>
 				<td><input id="optionsCheckbox" class="checkbox"  name="selector[]" type="checkbox" value="<?php echo $id; ?>"></td>
                 <td><?php echo $id; ?></td>
 				 <td><img class="img-circle" src="../<?php echo $row ['image'];?>" width="30" height="30"></td>
-                <td><?php echo $acctno; ?></td>
-				<td><?php echo $lname; ?></td>
+                <td><?php echo $lname; ?></td>
 				<td><?php echo $fname; ?></td>
 				<td><?php echo $email; ?></td>
                 <td><?php echo $phone; ?></td>
-<?php
-$query = mysqli_query($link, "SELECT * FROM systemset");
-$get_query = mysqli_fetch_array($query);
-?>
-				<td><?php echo $get_query['currency'].number_format($bal,2,'.',','); ?></td>
-				<td align="center"><a href="add_to_borrower_list.php?id=<?php echo $id; ?>&&mid=<?php echo base64_encode("410"); ?>" class="btn btn-info btn-flat">Add to Borrower List</a></td>
-				</tr>
+				<td><?php echo $bank_acc; ?></td>
+				<td><?php echo $acc; ?></td>
+				<td><?php echo $nominee; ?></td>
+				<td><?php echo $nominee_ph; ?></td>
+				<td><?php echo $aadhaar; ?></td>
+				<td><?php echo $kic_no; ?></td>
+				<td><?php echo $address1; ?></td>
+				<td><?php echo $address2; ?></td>
+				
+
+				<td align="center"><?php echo ($pupdate == '1') ? '<a href="transactionind.php?id='.$acc.'" class="btn btn-info btn-flat">Transactions</a>' : '<i class="fa fa-lock"></i>'; ?>
+			
+				</td>
+    </tr>
 <?php } } ?>
              </tbody>
                 </table>  
@@ -78,14 +103,14 @@ $get_query = mysqli_fetch_array($query);
 							$N = count($id);
 						if($id == ''){
 						echo "<script>alert('Row Not Selected!!!'); </script>";	
-						echo "<script>window.location='customer.php?id=".$_SESSION['tid']."'; </script>";
+						echo "<script>window.location='listborrowers.php?id=".$_SESSION['tid']."&&mid=".base64_encode("403")."'; </script>";
 							}
 							else{
 							for($i=0; $i < $N; $i++)
 							{
 								$result = mysqli_query($link,"DELETE FROM borrowers WHERE id ='$id[$i]'");
 								echo "<script>alert('Row Delete Successfully!!!'); </script>";
-								echo "<script>window.location='customer.php?id=".$_SESSION['tid']."'; </script>";
+								echo "<script>window.location='listborrowers.php?id=".$_SESSION['tid']."&&mid=".base64_encode("403")."'; </script>";
 							}
 							}
 							}

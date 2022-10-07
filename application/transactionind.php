@@ -6,24 +6,24 @@
 <?php include("include/side_bar.php"); ?>
   <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    
+   <?php $acc = $_GET['id'];?>
 	<!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Register New Customer
+        All Transaction
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active"> <a href="customer.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("410"); ?>">Customer</a></li>
-        <li class="active">Add</li>
+        <li class="active">Transaction</li>
       </ol>
     </section>
-	
     <section class="content">
-		<?php 
-    include("include/addcustomer_data.php"); ?>
+		<?php include("include/transactionind_data.php"); ?>
 	</section>
-</div>
+</div>	
+
+<?php include("modal/transaction_modal.php"); ?>
 
 <?php include("include/footer.php"); ?>

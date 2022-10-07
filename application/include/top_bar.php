@@ -110,7 +110,7 @@ $check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESS
 while($get_check = mysqli_fetch_array($check)){
 $pread = $get_check['pread'];
 ?>
-                <?php echo ($pread == 1) ? '<div class="col-xs-4 text-center"><a href="inboxmessage.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("406").'">Mailbox</a></div>' : ''; ?>
+               
 <?php } ?>
                 </div>
                 <!-- /.row -->
@@ -122,7 +122,7 @@ $check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESS
 while($get_check = mysqli_fetch_array($check)){
 $pcreate = $get_check['pcreate'];
 ?>
-                <?php echo ($pcreate == 1) ? '<div class="pull-left"><a href="newmessage.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("406").'" class="btn btn-info btn-flat">New Message</a></div>' : ''; ?>
+               
 <?php } ?>
                 <div class="pull-right">
                   <a href="../logout.php" class="btn btn-warning btn-flat"><i class="fa fa-sign-out"></i>Sign out</a>
