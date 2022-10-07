@@ -149,7 +149,7 @@ if(isset($_POST['save']))
                   <label for="" class="col-sm-2 control-label" style="color:#009900">Group Name</label>
                   <div class="col-sm-10">
                   <?php
-                    $link = mysqli_connect('localhost','root','','loan') or die('Unable to Connect to Database');
+                    $link = mysqli_connect('localhost','svan_user','1zgia8yCb*G#@lwz','svan_bank') or die('Unable to Connect to Database');
                     $query = "SELECT * FROM `tbl_bgroup` WHERE 1";
                     $stmt = mysqli_query($link,$query);
                     $count = $stmt->num_rows;
