@@ -50,22 +50,22 @@ if(isset($_POST['save']))
 	// $phonecheck = mysqli_query($link,"SELECT * FROM {$table} WHERE {$column2} = {$value2}");
 	// $accountcheck = mysqli_query($link, "SELECT * FROM {$table} WHERE {$column3} = {$value3}");
 	// $bank_accountcheck = mysqli_query($link,"SELECT * FROM {$table} WHERE {$column4} = {$value4}");
-	$sql1 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE email='.$email.'");
-	$sql1 = mysqli_fetch_assoc($sql1);
-	echo $sql1['email'];
-	$Checker1 = $sql1['email'];
-	$sql2 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE phone='.$phone.'");
-	$sql2 = mysqli_fetch_assoc($sql2);
-	echo $sql2['phone'];
-	$Checker2 = $sql2['phone'];
-	$sql3 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE account='.$account.'");
-	$sql3 = mysqli_fetch_assoc($sql3);
-	echo $sql3['account'];
-	$Checker3 = $sql3['account'];
-	$sql4 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE bank_account='.$bank_account.'");
-	$sql4 = mysqli_fetch_assoc($sql4);
+	// $sql1 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE email='.$email.'");
+	// $sql1 = mysqli_fetch_assoc($sql1);
+	// echo $sql1['email'];
+	// $Checker1 = $sql1['email'];
+	// $sql2 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE phone='.$phone.'");
+	// $sql2 = mysqli_fetch_assoc($sql2);
+	// echo $sql2['phone'];
+	// $Checker2 = $sql2['phone'];
+	// $sql3 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE account='.$account.'");
+	// $sql3 = mysqli_fetch_assoc($sql3);
+	// echo $sql3['account'];
+	// $Checker3 = $sql3['account'];
+	// $sql4 = mysqli_query($link,"SELECT * FROM `borrowers` WHERE bank_account='.$bank_account.'");
+	// $sql4 = mysqli_fetch_assoc($sql4);
 	
-	$Checker4 = $sql4['bank_account'];
+	// $Checker4 = $sql4['bank_account'];
 
     
 		
@@ -73,27 +73,6 @@ if(isset($_POST['save']))
 	{
 		echo "<div class='alert alert-warning'>Invalid file type!</div>";
 	}
-	elseif($Checker1 != null)
-	
-	{
-		echo "<div class='alert alert-warning'>This email address is already exists!</div>";
-	}
-	elseif($Checker2 != null) 
-	{
-		
-		echo "<div class='alert alert-warning'>This phone number is already used!</div>";
-	}
-	elseif($Checker3 != null) 
-	{
-		
-		echo "<div class='alert alert-warning'>This SVAN account number is already exists!</div>";
-	}
-	elseif($Checker4 != null) 
-	{
-		
-		echo "<div class='alert alert-warning'>This bank account number is already exists!</div>";
-	}
-	
 	elseif(strlen($aadhaar_number) != 12)
 	{
 		echo "<p style='font-size:24px; color:#FF0000'>Aadhaar number must be 12 digits</p>";
