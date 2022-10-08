@@ -120,23 +120,7 @@ else{
 
 	
 
-<?php
-if(isset($_GET['mid']) && (trim($_GET['mid']) == base64_encode("404")))
-{
-$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Employee Wallet'") or die ("Error" . mysqli_error($link));
-$get_check = mysqli_fetch_array($check);
-$pread = $get_check['pread'];
-?>	
-	<?php echo ($pread == 1) ? '<li class="active"><a href="mywallet.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("404").'"><i class="fa fa-book"></i> <span>My Wallet</span></a></li>' : ''; ?>
-<?php
-}
-else{
-$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Employee Wallet'") or die ("Error" . mysqli_error($link));
-$get_check = mysqli_fetch_array($check);
-$pread = $get_check['pread'];
-	?>
-	<?php echo ($pread == 1) ? '<li><a href="mywallet.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("404").'"><i class="fa fa-book"></i> <span>My Wallet</span></a></li>' : ''; ?>
-<?php } ?>	
+
 	
 	
 <?php
