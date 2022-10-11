@@ -49,7 +49,7 @@ $country =  mysqli_real_escape_string($link, $_POST['country']);
 $comment =  mysqli_real_escape_string($link, $_POST['comment']);
 $username =  mysqli_real_escape_string($link, $_POST['username']);
 $password =  mysqli_real_escape_string($link, $_POST['password']);
-$encrypt = base64_encode($password);
+$encrypt = password_hash($password,PASSWORD_DEFAULT);
 
 $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
 if($image == "")
