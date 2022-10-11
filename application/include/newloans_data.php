@@ -10,7 +10,7 @@
 			 <form class="form-horizontal" method="post" enctype="multipart/form-data" action="process_loan_info.php">
 			  <?php echo '<div class="alert alert-info fade in" >
 			  <a href = "#" class = "close" data-dismiss= "alert"> &times;</a>
-  				<strong>Note that&nbsp;</strong> &nbsp;&nbsp;Some Fields are Rquired.
+  				<strong>Note that&nbsp;</strong> &nbsp;&nbsp;Some Fields are Required.
 				</div>'?>
              <div class="box-body">
 				
@@ -40,7 +40,7 @@
 				$getin = mysqli_query($link, "SELECT * FROM borrowers order by id") or die (mysqli_error($link));
 				while($row = mysqli_fetch_array($getin))
 				{
-				echo '<option value="'.$row['id'].'">'.$row['account'].'</option>';
+				echo '<option value="'.$row['account'].'">'.$row['account'].'</option>';
 				}
 				?>
 				</select>
@@ -64,11 +64,11 @@
 		 <div class="form-group">
                 <label for="" class="col-sm-2 control-label" style="color:#009900">Date Release</label>
 			 <div class="col-sm-10">
-              <div class="input-group date">
+              <div class="input-group ">
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input name="date_release" type="date" class="form-control pull-right" id="datepicker">
+                  <input name="date_release"  class="form-control pull-right" id="datepicker">
                 </div>
               </div>
 			  </div>
@@ -194,7 +194,16 @@ while($row = mysqli_fetch_array($sele))
           	</div>
 				  
 			 </div>
-			 
+<hr>	
+<div class="alert-danger">&nbsp;ADMIN/STAFF validation</div>
+<hr>
+<div class="form-group">
+                  <label for="Enter your Password" class="col-sm-2 control-label" style="color:#009900">Password:</label>
+                  <div class="col-sm-10">
+                  <input name="password" type="password" class="form-control" required>
+</div>
+
+
 			  <div align="right">
               <div class="box-footer">
                 				<button type="reset" class="btn btn-primary btn-flat"><i class="fa fa-times">&nbsp;Reset</i></button>

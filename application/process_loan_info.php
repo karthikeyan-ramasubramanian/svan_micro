@@ -1,4 +1,5 @@
 <?php include "../config/session.php"; ?>  
+<?php include "../config/connect.php"; ?>  
 
 <!DOCTYPE html>
 <html>
@@ -49,7 +50,7 @@ $gphone = mysqli_real_escape_string($link, $_POST['g_phone']);
 
 $g_rela = mysqli_real_escape_string($link, $_POST['grela']);
 $g_address = mysqli_real_escape_string($link, $_POST['gaddress']);
-
+$password = mysqli_real_escape_string($link, $_POST['password']);
 $status = mysqli_real_escape_string($link, $_POST['status']);
 $remarks = mysqli_real_escape_string($link, $_POST['remarks']);
 $pay_date = mysqli_real_escape_string($link, $_POST['pay_date']);
@@ -63,35 +64,39 @@ $target_dir = "../img/";
 $target_file = $target_dir.basename($_FILES["image"]["name"]);
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 $check = getimagesize($_FILES["image"]["tmp_name"]);
+$tid = $_SESSION['tid'];
 
+$pass = mysqli_query($link, "SELECT * from user WHERE id = '$tid'") or die (mysqli_error($link));
+$pass = mysqli_fetch_array($pass);
+$cpassword = $pass['password'];
 $encrypt = base64_encode($password);
 $id = "Loan"."=".rand(10000000,340000000);
 
-if($password != $cpaswword)
+if($encrypt != $cpassword)
 {
-echo "<script>alert('The 2 Password does not match!'); </script>";
+echo "<script>alert('The Password does not match!'); </script>";
 }
 elseif($check == false)
 {
-	echo '<meta http-equiv="refresh" content="2;url=view_emp.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+	echo '<meta http-equiv="refresh" content="2;url=newloans.php?tid='.$id.'&&mid='.base64_encode("409").'">';
 	echo '<br>';
 	echo'<span class="itext" style="color: #FF0000">Invalid file type</span>';
 }
 elseif(file_exists($target_file)) 
 {
-	echo '<meta http-equiv="refresh" content="2;url=view_emp.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+	echo '<meta http-equiv="refresh" content="2;url=newloans.php?tid='.$id.'&&mid='.base64_encode("409").'">';
 	echo '<br>';
 	echo'<span class="itext" style="color: #FF0000">Already exists.</span>';
 }
 elseif($_FILES["image"]["size"] > 500000)
 {
-	echo '<meta http-equiv="refresh" content="2;url=view_emp.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+	echo '<meta http-equiv="refresh" content="2;url=newloans.php?tid='.$id.'&&mid='.base64_encode("409").'">';
 	echo '<br>';
 	echo'<span class="itext" style="color: #FF0000">Image must not more than 500KB!</span>';
 }
 elseif($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif")
 {
-	echo '<meta http-equiv="refresh" content="2;url=view_emp.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+	echo '<meta http-equiv="refresh" content="2;url=newloans.php?tid='.$id.'&&mid='.base64_encode("409").'">';
 	echo '<br>';
 	echo'<span class="itext" style="color: #FF0000">Sorry, only JPG, JPEG, PNG & GIF Files are allowed.</span>';
 }
