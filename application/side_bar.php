@@ -33,6 +33,7 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
 		<li><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>"><i class="fa fa-dashboard"></i> <span>Dashbord</span></a></li>
+    
 		
 		<li class="treeview">
           <a href="#">
@@ -60,9 +61,24 @@
             <li><a href="listborrowers.php?id=<?php echo $_SESSION['tid']; ?>"><i class="fa fa-circle-o"></i>List Borrowers</a></li>
           </ul>
         </li>  
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Borrowers</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+ 			<li class="active"><a href="newborrowers.php?id=<?php echo $_SESSION['tid']; ?>"><i class="fa fa-circle-o"></i> New Borrowers</a></li>
+            <li><a href="listborrowers.php?id=<?php echo $_SESSION['tid']; ?>"><i class="fa fa-circle-o"></i>List Borrowers</a></li>
+          </ul>
+        </li>  
+
+        
 		
 	<li><a href="mywallet.php?id=<?php echo $_SESSION['tid']; ?>"><i class="fa fa-book"></i> <span>My Wallet</span></a></li>
-
+              
 		<li class="treeview">
           <a href="#">
             <i class="fa fa-dollar"></i> <span>Loans</span>

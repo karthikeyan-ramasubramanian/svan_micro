@@ -10,18 +10,18 @@
 	<!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Withdraw Money
+        Add Groups
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("401"); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"> <a href="transaction.php?id=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("410"); ?>">Transaction</a></li>
-        <li class="active">Withdraw</li>
+        <li><a href="dashboard.php?id=<?php echo $_SESSION['tid']; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"> <a href="borrowergrp.php?id=<?php echo $_SESSION['tid']; ?>">Groups</a></li>
+        <li class="active">Add</li>
       </ol>
     </section>
 	
     <section class="content">
-		<?php include("include/withdraw_data.php"); ?>
+		<?php include("include/newgroup_data.php"); ?>
 	</section>
 </div>
 

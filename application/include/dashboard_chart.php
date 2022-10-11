@@ -14,8 +14,9 @@ if($pcreate == '1' || $pread == '1')
  			
 			<h4>
 <?php
+ $Totalamt=0;
 $tid = $_SESSION['tid'];
-$select = mysqli_query($link, "SELECT Total FROM twallet WHERE tid = '$tid'") or die (mysqli_error($link));
+$select = mysqli_query($link, "SELECT Total FROM twallet") or die (mysqli_error($link));
 if(mysqli_num_rows($select)==0)
 {
 echo "0.00";
@@ -25,11 +26,15 @@ while($row = mysqli_fetch_array($select))
 {
 $select1 = mysqli_query($link, "SELECT * FROM systemset") or die (mysqli_error($link));
 while($row1 = mysqli_fetch_array($select1))
-{
-$currency = $row1['currency'];
-echo $currency.number_format($row['Total'],2,".",",")."</b>";
+{ 
+  $currency = $row1['currency'];
+  $Totalamt = $Totalamt + intval($row['Total']);
+  
+
 }
 }
+
+echo $currency.number_format($Totalamt,2,".",",")."</b>";
 }
 ?>			</h4>
               <p>Total Balance</p>

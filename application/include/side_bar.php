@@ -94,6 +94,7 @@ $pread = $get_check['pread'];
 <?php } ?>
 
 <!-- borrowergroup end -->
+
 <!-- customers -->
 <?php
 if(isset($_GET['mid']) && (trim($_GET['mid']) == base64_encode("407")))
@@ -117,6 +118,28 @@ else{
 
 <!-- customers end -->
 
+<!-- total Amount -->
+
+<?php
+ if(isset($_GET['mid']) && (trim($_GET['mid']) == base64_encode("407")))
+ {
+ 	$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Savings Account'") or die ("Error" . mysqli_error($link));
+ 	$get_check = mysqli_fetch_array($check);
+ 	$pcreate = $get_check['pcreate'];
+ 	$pread = $get_check['pread'];
+ ?>		
+ 		<?php echo ($pread == 1) ? '<li><a href="TotalAmount.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-users"></i>Total Amount</a></li>' : ''; ?> 	
+  <?php
+ }
+ else{
+ 	$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Savings Account'") or die ("Error" . mysqli_error($link));
+ 	$get_check = mysqli_fetch_array($check);
+ 	$pcreate = $get_check['pcreate'];
+ 	$pread = $get_check['pread'];
+?>		
+		<?php echo ($pread == 1) ? '<li><a href="TotalAmount.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-users"></i>Total Amount</a></li>' : ''; ?> 
+<?php } ?>
+<!-- total Amount end -->
 
 	
 
@@ -264,7 +287,7 @@ $pread = $get_check['pread'];
 		<?php echo ($pcreate == 1) ? '<li class="treeview active"><a href="#"><i class="fa fa-money"></i> <span>Savings Account</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">' : ''; ?>
 		<?php echo ($pread == 1) ? '<li><a href="customer.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-circle-o"></i>Customers</a></li>' : ''; ?> 
 		<?php echo ($pcreate == 1) ? '<li><a href="deposit.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-circle-o"></i>Deposit Money</a></li>' : ''; ?>
-		<?php echo ($pcreate == 1) ? '<li><a href="withdraw.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-circle-o"></i>Withdraw Money</a></li>' : ''; ?>
+		
 		<?php echo ($pread == 1) ? '<li><a href="transaction.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-circle-o"></i>All Transaction</a></li>' : ''; ?>
         <?php echo ($pcreate == 1) ? '</ul></li>' : ''; ?>
 <?php
