@@ -69,7 +69,7 @@ else{
 			echo "<div class='alert alert-danger'> Group code Already Exists</div>";
 	}
 	else{
-	$insert = mysqli_query($link, "INSERT INTO tbl_bgroup VALUES('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2')") or die (mysqli_error($link));
+	$insert = mysqli_query($link, "INSERT INTO tbl_bgroup VALUES('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2', '0')") or die (mysqli_error($link));
 	if(!$insert)
 	{
 	echo "<div class='alert alert-info'>Unable to Insert Records.....Please try again later</div>";
