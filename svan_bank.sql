@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 09, 2022 at 01:40 PM
--- Server version: 10.3.34-MariaDB-0ubuntu0.20.04.1
--- PHP Version: 7.3.33-1+focal
+-- Host: 127.0.0.1
+-- Generation Time: Oct 12, 2022 at 07:57 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -80,7 +80,8 @@ CREATE TABLE `attachment` (
 INSERT INTO `attachment` (`id`, `get_id`, `tid`, `attached_file`, `date_time`) VALUES
 (1, '1', 'Loan=1907598678', 'document/4887_File_cryptos documentation.docx', '2017-05-01 12:11:34'),
 (2, '2', 'Loan=21319580', 'document/2782_File_Email.docx', '2017-05-10 16:56:55'),
-(3, '5', 'Loan=21319580', 'document/2045_File_Marksheet Management System.docx', '2017-05-13 13:45:57');
+(3, '5', 'Loan=21319580', 'document/2045_File_Marksheet Management System.docx', '2017-05-13 13:45:57'),
+(4, '1', 'Loan=21319580', 'document/5375_File_20CS057 - KARTHIKEYAN R M MERN Stack.pptx', '2022-10-09 18:46:19');
 
 -- --------------------------------------------------------
 
@@ -186,10 +187,11 @@ CREATE TABLE `borrowers` (
 --
 
 INSERT INTO `borrowers` (`id`, `fname`, `lname`, `email`, `phone`, `bank_account`, `nominee`, `nominee_ph`, `aadhaar_number`, `kic_number`, `addrs1`, `addrs2`, `city`, `state`, `zip`, `country`, `comment`, `account`, `balance`, `image`, `date_time`, `status`) VALUES
-(7, 'Ayodeji', 'yyyy', 'business2016@gmail.com', '08033527716', '', '', '0', 0, '', 'FCE', 'Abeokuta', 'Ikeja', 'Lagos', '110001', 'US', 'Application for loan', '0034445656', '951.00', 'img/user3.png', '2022-10-07 06:19:03', 'Pending'),
-(8, 'Ayodeji', 'asd', 'business2016@gmail.com', '08033527716', '', '', '0', 0, '', 'FCE', 'Abeokuta', 'Ikeja', 'Lagos', '110001', 'US', 'Application for loan', '0021548721', '951.00', 'img/user3.png', '2022-10-07 06:18:37', 'Pending'),
-(9, 'Ayodeji', 'asd', 'business2016@gmail.com', '08033527716', '', '', '0', 0, '', 'FCE', 'Abeokuta', 'Ikeja', 'Lagos', '110001', 'US', 'Application for loan', '0021548723', '1451.00', 'img/user3.png', '2022-09-25 14:51:01', 'Pending'),
-(27, 'Sangavi', 'Kumar', 'karthiramesh56@gmail.com', '09444985694', '44554543544', 'kkkkkk', '09444985694', 2147483647, '512332154325', '9/1,Sairam Xerox,saravanampatti\r\nnear SNS college of Technology', '9/1,Sairam Xerox,saravanampatti\r\nnear SNS college of Technology', 'coimbatore', 'Tamil Nadu', '641035', 'IN', '', '0021258612', '0.00', 'img/pan.jpeg', '2022-10-07 12:55:13', 'Completed');
+(7, 'Ayodeji', 'yyyy', 'business2016@gmail.com', '08033527716', '', '', '0', 0, '', 'FCE', 'Abeokuta', 'Ikeja', 'Lagos', '110001', 'US', 'Application for loan', '0034445656', '951', 'img/user3.png', '2022-10-07 06:19:03', 'Pending'),
+(8, 'Ayodeji', 'asd', 'business2016@gmail.com', '08033527716', '', '', '0', 0, '', 'FCE', 'Abeokuta', 'Ikeja', 'Lagos', '110001', 'US', 'Application for loan', '0021548721', '951', 'img/user3.png', '2022-10-07 06:18:37', 'Pending'),
+(9, 'Ayodeji', 'asd', 'business2016@gmail.com', '08033527716', '', '', '0', 0, '', 'FCE', 'Abeokuta', 'Ikeja', 'Lagos', '110001', 'US', 'Application for loan', '0021548723', '1451', 'img/user3.png', '2022-09-25 14:51:01', 'Pending'),
+(27, 'Sangavi', 'Kumar', 'karthiramesh56@gmail.com', '09444985694', '44554543544', 'kkkkkk', '09444985694', 2147483647, '512332154325', '9/1,Sairam Xerox,saravanampatti\r\nnear SNS college of Technology', '9/1,Sairam Xerox,saravanampatti\r\nnear SNS college of Technology', 'coimbatore', 'Tamil Nadu', '641035', 'IN', '', '0021258612', '0', 'img/pan.jpeg', '2022-10-07 12:55:13', 'Completed'),
+(28, 'asd', 'hgjh', 'jhgj', 'hjhgjhgj', 'hgjhgjhg', 'hjgjh', 'jhgjhg', 897987987, '897987', '', '', 'uiyiuy', 'iuoiu', 'uouiu', 'uouiou', '', '', '7000', '9899090', '2022-10-12 16:56:20', 'pending');
 
 -- --------------------------------------------------------
 
@@ -692,6 +694,13 @@ CREATE TABLE `loan_info` (
   `upstatus` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `loan_info`
+--
+
+INSERT INTO `loan_info` (`id`, `borrower`, `baccount`, `desc`, `amount`, `date_release`, `agent`, `g_name`, `g_phone`, `g_address`, `rela`, `g_image`, `status`, `remarks`, `pay_date`, `amount_topay`, `teller`, `remark`, `upstatus`) VALUES
+(1, '7', '0034445656', 'vgfdasfsAD', '200000', '10/10/2022', 'KARTHIKEYAN', 'ram', '4364356435', 'cdvfbzxdgzdfg', 'father', 'img/TS-stamp-removebg-preview.png', 'Approved', 'dgfsdfgdf', '2023-10-09', '202330', 'KARTHIKEYAN', 'argtagdef', 'Pending');
+
 -- --------------------------------------------------------
 
 --
@@ -856,7 +865,11 @@ CREATE TABLE `tbl_bgroup` (
 
 INSERT INTO `tbl_bgroup` (`id`, `group_code`, `group_name`, `group_manager`, `group_submanager`, `group_img`, `acc_no`, `manager_ph`, `submanager_ph`, `address1`, `address2`) VALUES
 (1, '0034', 'xx', 'yy', 'tt', 'https://cdn-icons-png.flaticon.com/512/149/149071.png', '003421323', '99893848', '4563453535', '', ''),
-(2, '0021', 'uu', 'po', 'qq', 'https://cdn-icons-png.flaticon.com/512/149/149071.png', '0021542542', '39439488', '35353535', '', '');
+(2, '0021', 'uu', 'po', 'qq', 'https://cdn-icons-png.flaticon.com/512/149/149071.png', '0021542542', '39439488', '35353535', '', ''),
+(4, '1234', 'sangi mangi', 'sangavi', 'alithra', 'img/qrcode.png', '9897656557444', '3939393929', '3939393939', 'kelpakkam', 'mal pakkam'),
+(5, '9864', 'asdasdasdas', 'asdads', 'asdads', 'img/Indic Designs Creative Logo.png', 'asdasd', 'asdasd', 'asdasd', 'asdasd', 'asdasd'),
+(6, '7676', 'mm', 'nn', 'slead1', 'img/image-removebg-preview.png', '96758798765676', '89878878887', '3939393939', '', ''),
+(7, '8767', 'mani', 'lead1', 'slead1', 'img/toppng.com-white-location-icon-png-location-logo-png-white-696x872.png', '9897656557', '3939393929', '9898989898', '', '');
 
 -- --------------------------------------------------------
 
@@ -1143,7 +1156,7 @@ ALTER TABLE `additional_fees`
 -- AUTO_INCREMENT for table `attachment`
 --
 ALTER TABLE `attachment`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `backup`
@@ -1167,7 +1180,7 @@ ALTER TABLE `battachment`
 -- AUTO_INCREMENT for table `borrowers`
 --
 ALTER TABLE `borrowers`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `collateral`
@@ -1227,7 +1240,7 @@ ALTER TABLE `hiw`
 -- AUTO_INCREMENT for table `loan_info`
 --
 ALTER TABLE `loan_info`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `mywallet`
@@ -1251,7 +1264,7 @@ ALTER TABLE `payment_schedule`
 -- AUTO_INCREMENT for table `pay_schedule`
 --
 ALTER TABLE `pay_schedule`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `systemset`
@@ -1263,7 +1276,7 @@ ALTER TABLE `systemset`
 -- AUTO_INCREMENT for table `tbl_bgroup`
 --
 ALTER TABLE `tbl_bgroup`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `transaction`
