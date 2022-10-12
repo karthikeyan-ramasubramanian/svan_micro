@@ -19,33 +19,18 @@
                 <label for="" class="col-sm-2 control-label" style="color:#009900">Borrower</label>
 				 <div class="col-sm-10">
                 <select name="borrower" class="customer select2" style="width: 100%;">
-				<option selected="selected">--Select Customer Account--</option>
-				<?php
-				$get = mysqli_query($link, "SELECT * FROM borrowers order by id") or die (mysqli_error($link));
-				while($rows = mysqli_fetch_array($get))
-				{
-				echo '<option value="'.$rows['id'].'">'.$rows['fname'].'&nbsp;'.$rows['lname'].'</option>';
-				}
-				?>
+                  <option selected="selected">--Select Customer Account--</option>
+                  <?php
+                  $get = mysqli_query($link, "SELECT * FROM tbl_bgroup order by id") or die (mysqli_error($link));
+                  while($rows = mysqli_fetch_array($get))
+                  {
+                  echo '<option value="'.$rows['group_name'].'">'.$rows['group_name'].'&nbsp;</option>';
+                  }
+                  ?>
                 </select>
               </div>
 			  </div>
-			  
-			<div class="form-group">
-                  <label for="" class="col-sm-2 control-label" style="color:#009900">Account</label>
-                  <div class="col-sm-10">
-                  <select class="account select2" name="account" style="width: 100%;">
-				<option selected="selected">--Select Customer Account--</option>
-                  <?php
-				$getin = mysqli_query($link, "SELECT * FROM borrowers order by id") or die (mysqli_error($link));
-				while($row = mysqli_fetch_array($getin))
-				{
-				echo '<option value="'.$row['account'].'">'.$row['account'].'</option>';
-				}
-				?>
-				</select>
-                  </div>
-                  </div>
+          
 				 
 		<div class="form-group">
                   <label for="" class="col-sm-2 control-label" style="color:#009900">Amount</label>

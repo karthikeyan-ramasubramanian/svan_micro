@@ -1,5 +1,5 @@
 <div class="row">
-    
+
 		    <section class="content">  
 	        <div class="box box-success">
             <div class="box-body">
@@ -45,7 +45,7 @@ $customer = $row['customer'];
 $getin = mysqli_query($link, "SELECT fname, lname, account FROM borrowers WHERE id = '$customer'") or die (mysqli_error($link));
 $have = mysqli_fetch_array($getin);
 $nameit = $have['fname'].'&nbsp;'.$have['lname'];
-//$accte = $have['account'];
+$accte = $have['account'];
 $loan = $row['loan'];
 $amount_to_pay = $row['amount_to_pay'];
 $pay_date = $row['pay_date'];
@@ -102,7 +102,7 @@ $currency = $row1['currency'];
             <div class="box-body">
             <div class="alert alert-info" align="center" class="style2" style="color: #FFFFFF">NUMBER OF LOAN APPLICANTS:&nbsp;
 			<?php 
-			$call3 = mysqli_query($link, "SELECT * FROM payments ");
+			$call3 = mysqli_query($link, "SELECT * FROM payments");
 			$num3 = mysqli_num_rows($call3);
 			?>
 			<?php echo $num3; ?> 

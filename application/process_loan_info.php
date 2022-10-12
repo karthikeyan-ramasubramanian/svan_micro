@@ -1,5 +1,6 @@
 <?php include "../config/session.php"; ?>  
 <?php include "../config/connect.php"; ?>  
+ 
 
 <!DOCTYPE html>
 <html>
@@ -40,7 +41,15 @@
 if(isset($_POST['save_loan']))
 {
 $borrower =  mysqli_real_escape_string($link, $_POST['borrower']);
-$baccount = mysqli_real_escape_string($link, $_POST['account']);
+$account = mysqli_query($link, "SELECT * FROM tbl_bgroup WHERE group_name = '$borrower'") or die (mysqli_error($link));
+$account = mysqli_fetch_array($account);
+if (empty($account)) {
+	echo'<span class="itext" style="color: #FF0000">null values</span>';
+    return false;
+}
+else{
+	$baccount = $account['group_code'];
+}
 $desc = mysqli_real_escape_string($link, $_POST['desc']);
 $amount = mysqli_real_escape_string($link, $_POST['amount']);
 $date_release = mysqli_real_escape_string($link, $_POST['date_release']);
@@ -58,6 +67,11 @@ $amount_topay = mysqli_real_escape_string($link, $_POST['amount_topay']);
 $upstatus = "Pending";
 $teller = mysqli_real_escape_string($link, $_POST['teller']);
 $remark = mysqli_real_escape_string($link, $_POST['remark']);
+$count = mysqli_query($link, "Select COUNT( case when group_no = '{$baccount}' THEN 1 END) as total from borrowers") or die (mysqli_error($link));
+$data=mysqli_fetch_array($count);
+$tot = $data['total'];
+echo "<p> .'$tot'. </p>";
+$sharecust = $amount / $tot;
 
 
 $target_dir = "../img/";
@@ -82,12 +96,12 @@ elseif($check == false)
 	echo '<br>';
 	echo'<span class="itext" style="color: #FF0000">Invalid file type</span>';
 }
-elseif(file_exists($target_file)) 
-{
-	echo '<meta http-equiv="refresh" content="2;url=newloans.php?tid='.$id.'&&mid='.base64_encode("409").'">';
-	echo '<br>';
-	echo'<span class="itext" style="color: #FF0000">Already exists.</span>';
-}
+// elseif(file_exists($target_file)) 
+// {
+// 	echo '<meta http-equiv="refresh" content="2;url=newloans.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+// 	echo '<br>';
+// 	echo'<span class="itext" style="color: #FF0000">Already exists.</span>';
+// }
 elseif($_FILES["image"]["size"] > 500000)
 {
 	echo '<meta http-equiv="refresh" content="2;url=newloans.php?tid='.$id.'&&mid='.base64_encode("409").'">';
@@ -109,6 +123,18 @@ else{
 
 
 $insert = mysqli_query($link, "INSERT INTO loan_info VALUES('','$borrower','$baccount','$desc','$amount','$date_release','$agent','$gname','$gphone','$g_address','$g_rela','$location','$status','$remarks','$pay_date','$amount_topay','$teller','$remark','$upstatus')") or die (mysqli_error($link));
+$custlist = mysqli_query($link, "SELECT * FROM `borrowers` WHERE `group_no` = '$baccount'") or die (mysqli_error($link));
+while($row =  mysqli_fetch_array($custlist))
+ {
+	$bid = $row['id'];
+	echo"<p> .'$bid;																																																																																																																																																																																																																																																																																																																																																												'. </p>";
+	$bal = $row['balance'];
+	echo"<p> .'$bal'. </p>";
+	$totbal = $bal + $sharecust;
+	echo "<p> .'$totbal'. </p>";
+	$share = mysqli_query($link, "UPDATE `borrowers` SET `balance` = '$totbal' Where id = '$bid'") or die (mysqli_error($link));
+  }
+
 if(!$insert)
 {
  echo '<meta http-equiv="refresh" content="2;url=newloans.php?tid='.$_SESSION['tid'].'">';

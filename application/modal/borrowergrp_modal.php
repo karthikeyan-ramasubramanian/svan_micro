@@ -40,26 +40,36 @@ $data=mysqli_fetch_array($count);
 				  <label for="" class="col-sm-3 "style="color:#FF0000">Name:</label>
 				  <label for="" class="col-sm-2 "style="color:#00000"><?php echo $row['group_name'] ;?></label>
 				  
-				  <div class="col-sm-10 "></div>
-				   <label for="" class="col-sm-3"style="color:#FF0000">Acc Number:</label>
+				  <div class="col-sm-10 ">
+				  <label for="" class="col-sm-3"style="color:#FF0000">Acc Number:</label>
 				   <label for="" class="col-sm-1"style="color:#00000"><?php echo $row['acc_no'];?></label>
-				   <div class="col-sm-10"></div>
+				  </div>
+				   <div class="col-sm-10">
 				   <label for="" class="col-sm-3"style="color:#FF0000">Manager:</label>
 				   <label for="" class="col-sm-2"style="color:#00000"><?php echo $row['group_manager'];?></label>
-				   <div class="col-sm-10"></div>
-				   <div class="col-sm-10"></div>
+				   </div>
+				   <div class="col-sm-10">
 				   <label for="" class="col-sm-3"style="color:#FF0000">Submanager:</label>
 				   <label for="" class="col-sm-2"style="color:#00000"><?php echo $row['group_submanager'];?></label>
-				   <div class="col-sm-10"></div>
+				   </div>
+				  
+				   <div class="col-sm-10">
 				   <label for="" class="col-sm-3"style="color:#FF0000">M1 Number:</label>
 				   <label for="" class="col-sm-2"style="color:#00000"><?php echo $row['manager_ph'];?></label>
-				    <div class="col-sm-10"></div>
+				   </div>
+				  
+				    <div class="col-sm-10">
 					<label for="" class="col-sm-3"style="color:#FF0000">M2 Number:</label>
 				   <label for="" class="col-sm-2"style="color:#00000"><?php echo $row['submanager_ph'];?></label>
-				    <div class="col-sm-10"></div>
-				    <label for="" class="col-sm-3"style="color:#FF0000">Member count:</label>
-				   <label for="" class="col-sm-2"style="color:#00000"><?php echo $data['total'];?></label>
-				   <div class="col-sm-10"></div>
+					</div>
+					
+				    <div class="col-sm-10"> <label for="" class="col-sm-3"style="color:#FF0000">Member count:</label>
+				   <label for="" class="col-sm-2"style="color:#00000"><?php echo $data['total'];?></label></div>
+				   
+				   <div class="col-sm-10">
+				   <label for="" class="col-sm-3"style="color:#FF0000">Total Amount loan:</label>
+				   <label for="" class="col-sm-2"style="color:#00000"><?php echo $row['amount'];?></label>
+				   </div>
 
 				  
 

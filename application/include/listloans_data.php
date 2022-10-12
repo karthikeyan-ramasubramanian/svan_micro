@@ -37,7 +37,7 @@ $num = mysqli_num_rows($select);
                   <th>Description</th>
                   <th>Amount</th>
                   <th>Balance</th>
-                  <th>Customer</th>
+                  <th>Customer group</th>
 				  <th>Agent</th>
                   <th>Approve By</th>
                   <th>date Release</th>
@@ -61,9 +61,9 @@ $id = $row['id'];
 $borrower = $row['borrower'];
 $status = $row['status'];
 $upstatus = $row['upstatus'];
-$selectin = mysqli_query($link, "SELECT fname, lname FROM borrowers WHERE id = '$borrower'") or die (mysqli_error($link));
-$geth = mysqli_fetch_array($selectin);
-$name = $geth['fname'];
+// $selectin = mysqli_query($link, "SELECT fname, lname FROM borrowers WHERE id = '$borrower'") or die (mysqli_error($link));
+// $geth = mysqli_fetch_array($selectin);
+// $name = $geth['fname'];
 ?> 
 <?php
 if($upstatus == "Pending")
@@ -76,7 +76,7 @@ if($upstatus == "Pending")
 				<td><?php echo $row['desc']; ?></td>
                 <td><?php echo $row['amount']; ?></td>
 				<td><?php echo $row['amount_topay']; ?></td>
-				<td><?php echo $geth['fname']; ?></td>
+				<td><?php echo $row['borrower']; ?></td>
 				<td><?php echo $row['agent']; ?></td>
 			    <td><?php echo $row['teller']; ?></td>
 				<td><?php echo $row['date_release']; ?></td>
@@ -108,7 +108,7 @@ else{
 				<td><?php echo $row['desc']; ?></td>
                 <td><?php echo $row['amount']; ?></td>
 				<td><?php echo $row['amount_topay']; ?></td>
-				<td><?php echo $geth['fname']; ?></td>
+				<td><?php echo $row['borrower']; ?></td>
 				<td><?php echo $row['agent']; ?></td>
 			    <td><?php echo $row['teller']; ?></td>
 				<td><?php echo $row['date_release']; ?></td>

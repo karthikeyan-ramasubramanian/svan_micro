@@ -1,0 +1,1 @@
+<?php $link = mysqli_connect('localhost','svan_user','1zgia8yCb*G#@lwz','svan_bank') or die('Unable to Connect to Database'); ?>

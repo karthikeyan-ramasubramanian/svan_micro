@@ -8,6 +8,7 @@
             </div>
              <div class="box-body">
 <?php
+include("./config/connect.php");
 $id = $_GET['id'];
 $select = mysqli_query($link, "SELECT * FROM payments WHERE id = '$id'") or die (mysqli_error($link));
 while($get = mysqli_fetch_array($select))
