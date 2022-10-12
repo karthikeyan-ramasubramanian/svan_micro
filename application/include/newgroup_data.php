@@ -18,20 +18,18 @@ if(isset($_POST['save']))
 $Gcode =  mysqli_real_escape_string($link, $_POST['Gcode']);
 $Gname = mysqli_real_escape_string($link, $_POST['Gname']);
 $Gmname = mysqli_real_escape_string($link, $_POST['Gmname']);
-$phone = mysqli_real_escape_string($link, $_POST['phone']);
+$Gsmname = mysqli_real_escape_string($link, $_POST['Gsmname']);
+$Accno = mysqli_real_escape_string($link, $_POST['Accno']);
+$Mgphone = mysqli_real_escape_string($link, $_POST['Mgphone']);
+$Smgphone = mysqli_real_escape_string($link, $_POST['Smgphone']);
 $addrs1 = mysqli_real_escape_string($link, $_POST['addrs1']);
 $addrs2 = mysqli_real_escape_string($link, $_POST['addrs2']);
-$city = mysqli_real_escape_string($link, $_POST['city']);
-$state = mysqli_real_escape_string($link, $_POST['state']);
-$zip = mysqli_real_escape_string($link, $_POST['zip']);
-$country = mysqli_real_escape_string($link, $_POST['country']);
-$comment = mysqli_real_escape_string($link, $_POST['comment']);
-$account = mysqli_real_escape_string($link, $_POST['account']);
-$status = "Pending";
 
-//$image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-//$image_name = addslashes($_FILES['image']['name']);
-//$image_size = getimagesize($_FILES['image']['tmp_name']);
+// $status = "Pending";
+
+$image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+$image_name = addslashes($_FILES['image']['name']);
+$image_size = getimagesize($_FILES['image']['tmp_name']);
 
 $target_dir = "../img/";
 $target_file = $target_dir.basename($_FILES["image"]["name"]);
@@ -40,45 +38,51 @@ $check = getimagesize($_FILES["image"]["tmp_name"]);
 
 if($check == false)
 {
-	echo '<meta http-equiv="refresh" content="2;url=view_emp.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
 	echo '<br>';
 	echo'<span class="itext" style="color: #FF0000">Invalid file type</span>';
 }
-elseif(file_exists($target_file)) 
-{
-	echo '<meta http-equiv="refresh" content="2;url=view_emp.php?tid='.$id.'&&mid='.base64_encode("409").'">';
-	echo '<br>';
-	echo'<span class="itext" style="color: #FF0000">Already exists.</span>';
-}
+
 elseif($_FILES["image"]["size"] > 500000)
 {
-	echo '<meta http-equiv="refresh" content="2;url=view_emp.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
 	echo '<br>';
 	echo'<span class="itext" style="color: #FF0000">Image must not more than 500KB!</span>';
 }
 elseif($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif")
 {
-	echo '<meta http-equiv="refresh" content="2;url=view_emp.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
 	echo '<br>';
 	echo'<span class="itext" style="color: #FF0000">Sorry, only JPG, JPEG, PNG & GIF Files are allowed.</span>';
 }
 else{
+	
 	$sourcepath = $_FILES["image"]["tmp_name"];
 	$targetpath = "../img/" . $_FILES["image"]["name"];
 	move_uploaded_file($sourcepath,$targetpath);
-	
 	$location = "img/".$_FILES['image']['name'];
-
-$insert = mysqli_query($link, "INSERT INTO borrowers VALUES('','$fname','$lname','$email','$phone','$addrs1','$addrs2','$city','$state','$zip','$country','$comment','$account','0.0','$location',NOW(),'$status')") or die (mysqli_error($link));
-if(!$insert)
-{
-echo "<div class='alert alert-info'>Unable to Insert Borrower Records.....Please try again later</div>";
-}
-else{
-echo "<div class='alert alert-success'>Borrower Information Created Successfully!</div>";
-}
-}
-}
+	$link = mysqli_connect('localhost','svan_user','1zgia8yCb*G#@lwz','svan_bank') or die('Unable to Connect to Database');
+	$duplicate=mysqli_query($link,"SELECT * FROM tbl_bgroup WHERE group_code='$Gcode'");
+	
+	if(mysqli_num_rows($duplicate)>0)
+	{
+			echo "<div class='alert alert-danger'> Group code Already Exists</div>";
+	}
+	else{
+	$insert = mysqli_query($link, "INSERT INTO tbl_bgroup VALUES('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2')") or die (mysqli_error($link));
+	if(!$insert)
+	{
+	echo "<div class='alert alert-info'>Unable to Insert Records.....Please try again later</div>";
+	}
+	else{
+	echo "<div class='alert alert-success'> Information Created Successfully!</div>";
+	}
+	}
+	}
+	
+	}
+	
+    // $insert = mysqli_query($link, "INSERT INTO `tbl_bgroup` VALUES ('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2'") or die (mysqli_error($link));
 ?>			  				
 			<div class="form-group">
             <label for="" class="col-sm-2 control-label">Group Image</label>
@@ -94,7 +98,7 @@ echo "<div class='alert alert-success'>Borrower Information Created Successfully
 <?php
 // $account = '013'.rand(1000000,10000000);
 ?>
-                  <input name="account" type="text" class="form-control" value="<?php echo $account; ?>" placeholder="Account Number" readonly>
+                  <input name="account" type="text" class="form-control" value="<?php  //echo $account; ?>" placeholder="Account Number" readonly>
                   </div>
                   </div> -->
 				  

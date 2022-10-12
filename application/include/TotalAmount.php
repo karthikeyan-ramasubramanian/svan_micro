@@ -15,7 +15,14 @@
 	<a href="printcustomer.php" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-print"></i>&nbsp;Print</a>
 	<a href="borrowexcel.php" target="_blank" class="btn btn-success btn-flat"><i class="fa fa-send"></i>&nbsp;Export Excel</a>
 	<a href="pdfcustomers.php" target="_blank" class="btn btn-info btn-flat"><i class="fa fa-file-pdf-o"></i>&nbsp;Export PDF</a>
+	<p class="btn btn-success btn-flat" style="cursor:default; ">&nbsp;Total Amount: <b>Rs.<?php 
+	$result = mysqli_query($link, 'SELECT SUM(balance) AS value_sum FROM borrowers'); 
+	$row = mysqli_fetch_assoc($result); 
+	$sum = $row['value_sum'];
+			echo $sum;
 	
+	?></b>
+	</p>
 	<hr>		
 			  
 			 <table id="example1" class="table table-bordered table-striped">
