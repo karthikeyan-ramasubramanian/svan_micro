@@ -31,9 +31,8 @@ $addrs2 = mysqli_real_escape_string($link, $_POST['addrs2']);
 // $image_name = addslashes($_FILES['image']['name']);
 // $image_size = getimagesize($_FILES['image']['tmp_name']);
 
-// $target_dir = "../img/";
-// $target_file = $target_dir.basename($_FILES["image"]["name"]);
-// $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+
 // $check = getimagesize($_FILES["image"]["tmp_name"]);
 
 // if($check == false)
@@ -58,14 +57,27 @@ $addrs2 = mysqli_real_escape_string($link, $_POST['addrs2']);
 
 	$sourcepath = $_FILES["image"]["tmp_name"];
 	$targetpath = "../img/" . $_FILES["image"]["name"];
-	move_uploaded_file($sourcepath,$targetpath);
+	$target_dir = "../img/";
+$target_file = $target_dir.basename($_FILES["image"]["name"]);
+	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	$RandomAccountNumber = uniqid();
+	$imagefilename =  $RandomAccountNumber.".".$imageFileType;
+	
+	
+	$ProfilePicName = $_FILES["image"]["name"];
+	$ProfilePicType = $_FILES["image"]["type"];
+	$ProfilePicSize = $_FILES["image"]["size"];
+	$ProfilePicTemp = $_FILES["image"]["tmp_name"];
+	$ProfilePicError = $_FILES["image"]["error"];
+
+	move_uploaded_file($ProfilePicTemp, "../img/".$imagefilename);
 	
 	if($_FILES["image"]["name"]==NULL )
 	{
 		$location ="img/default.img";
 	}
 	else{
-		$location = "img/".$_FILES['image']['name'];
+		$location = "img/".$RandomAccountNumber.$ProfilePicType;
 	}
 	$link = mysqli_connect('localhost','svan_user','1zgia8yCb*G#@lwz','svan_bank') or die('Unable to Connect to Database');
 	$duplicate=mysqli_query($link,"SELECT * FROM tbl_bgroup WHERE group_code='$Gcode'");
@@ -75,7 +87,7 @@ $addrs2 = mysqli_real_escape_string($link, $_POST['addrs2']);
 			echo "<div class='alert alert-danger'> Group code Already Exists</div>";
 	}
 	else{
-	$insert = mysqli_query($link, "INSERT INTO tbl_bgroup VALUES('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2', '0')") or die (mysqli_error($link));
+	$insert = mysqli_query($link, "INSERT INTO tbl_bgroup VALUES('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2')") or die (mysqli_error($link));
 	if(!$insert)
 	{
 	echo "<div class='alert alert-info'>Unable to Insert Records.....Please try again later</div>";
