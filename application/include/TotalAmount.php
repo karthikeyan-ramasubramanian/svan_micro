@@ -37,11 +37,13 @@
                   <th>Email</th>
                   <th>Mobile Number</th>
                   <th>Balance</th>
+				  <!-- <th>Total balance</th> -->
                 
                  </tr>
                 </thead>
                 <tbody>
 <?php
+$tot = 0;
 $select = mysqli_query($link, "SELECT * FROM borrowers") or die (mysqli_error($link));
 if(mysqli_num_rows($select)==0)
 {
@@ -58,6 +60,7 @@ $email = $row['email'];
 $phone = $row['phone'];
 $bal = $row['balance'];
 
+$tot += $bal;
 ?>    
                 <tr>
 				<td><input id="optionsCheckbox" class="checkbox"  name="selector[]" type="checkbox" value="<?php echo $id; ?>"></td>
@@ -68,7 +71,9 @@ $bal = $row['balance'];
 				<td><?php echo $email; ?></td>
                 <td><?php echo $phone; ?></td>
 				<td><?php echo $bal; ?></td>
+			
 <?php
+
 ?>
 			
 <?php } } ?>
@@ -94,6 +99,9 @@ $bal = $row['balance'];
 							}
 ?>			
 </form>
+<?php
+echo "<div class='alert alert-success'>Total amount in loan : $tot</div>";
+?>
 				
 
               </div>

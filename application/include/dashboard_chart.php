@@ -13,10 +13,10 @@ if($pcreate == '1' || $pread == '1')
             <div class="inner">
  			
 			<h4>
+     
 <?php
- $Totalamt=0;
-$tid = $_SESSION['tid'];
-$select = mysqli_query($link, "SELECT Total FROM twallet") or die (mysqli_error($link));
+ $tot=0;
+$select = mysqli_query($link, "SELECT * FROM borrowers") or die (mysqli_error($link));
 if(mysqli_num_rows($select)==0)
 {
 echo "0.00";
@@ -27,14 +27,15 @@ while($row = mysqli_fetch_array($select))
 $select1 = mysqli_query($link, "SELECT * FROM systemset") or die (mysqli_error($link));
 while($row1 = mysqli_fetch_array($select1))
 { 
+  $bal = $row['balance'];
   $currency = $row1['currency'];
-  $Totalamt = $Totalamt + intval($row['Total']);
+  $tot = $tot + $bal;
   
 
 }
 }
 
-echo $currency.number_format($Totalamt,2,".",",")."</b>";
+echo $currency.number_format($tot,2,".",",")."</b>";
 }
 ?>			</h4>
               <p>Total Balance</p>
@@ -42,7 +43,7 @@ echo $currency.number_format($Totalamt,2,".",",")."</b>";
             <div class="icon"><img height="80" width="80" src="../img/ass.png">
               <i class=""></i>
             </div>
-            <a href="mywallet.php?tid=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("404"); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="TotalAmount.php?tid=<?php echo $_SESSION['tid']; ?>&&mid=<?php echo base64_encode("404"); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>		  
         </div>
 <?php
