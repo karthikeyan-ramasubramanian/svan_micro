@@ -74,10 +74,10 @@ $target_file = $target_dir.basename($_FILES["image"]["name"]);
 	
 	if($_FILES["image"]["name"]==NULL )
 	{
-		$location ="img/default.img";
+		$location ="img/default.png";
 	}
 	else{
-		$location = "img/".$RandomAccountNumber.$ProfilePicType;
+		$location = "img/".$imagefilename;
 	}
 	$link = mysqli_connect('localhost','svan_user','1zgia8yCb*G#@lwz','svan_bank') or die('Unable to Connect to Database');
 	$duplicate=mysqli_query($link,"SELECT * FROM tbl_bgroup WHERE group_code='$Gcode'");

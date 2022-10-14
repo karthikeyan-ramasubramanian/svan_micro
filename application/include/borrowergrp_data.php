@@ -47,7 +47,7 @@ $name = $row['group_name'];
 $code = $row['group_code'];
 $manager = $row['group_manager'];
 $submanager = $row['group_submanager'];
-//$image = $row['image'];
+$image = $row['group_img'];
 $check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Borrower Details'") or die ("Error" . mysqli_error($link));
 $get_check = mysqli_fetch_array($check);
 $pupdate = $get_check['pupdate'];
@@ -56,7 +56,7 @@ $pread= $get_check['pread'];
                 <tr>
 				<td><input id="optionsCheckbox" class="checkbox"  name="selector[]" type="checkbox" value="<?php echo $id; ?>"></td>
                 
-				 <td><img class="img-circle" src="<?php echo $row ['group_img'];?>" width="30" height="30"></td>
+				 <td><img class="img-circle" src="../<?php echo $image;?>" width="30" height="30"></td>
                 <td><?php echo $code; ?></td>
 				<td><?php echo $name; ?></td>
 				<td><?php echo $manager; ?></td>
