@@ -1,4 +1,6 @@
+<?php include("include/header.php"); 
 
+?>
 <div class="wrapper">
 
 <?php include("include/top_bar.php"); ?>
