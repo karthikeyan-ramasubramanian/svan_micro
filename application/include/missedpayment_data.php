@@ -51,9 +51,10 @@ while($row = mysqli_fetch_array($select))
 {
 $id = $row['id'];
 $borrower = $row['borrower'];
+$baccount = $row['baccount'];
 $status = $row['status'];
 $upstatus = $row['upstatus'];
-$selectin = mysqli_query($link, "SELECT fname, lname FROM borrowers WHERE id = '$borrower'") or die (mysqli_error($link));
+$selectin = mysqli_query($link, "SELECT fname, lname FROM borrowers WHERE group_no = '$baccount'") or die (mysqli_error($link));
 $geth = mysqli_fetch_array($selectin);
 $name = $geth['fname'];
 ?> 

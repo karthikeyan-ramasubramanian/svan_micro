@@ -29,7 +29,9 @@
 				  <th>Last Name</th>
                   <th>Email</th>
                   <th>Mobile Number</th>
-                  <th>Balance</th>
+                  <th>Loan Amount</th>
+				  <th>Loan Returns</th>
+				  <th>Balance Amount</th>
                   <th>Actions</th>
                  </tr>
                 </thead>
@@ -50,7 +52,9 @@ $fname = $row['fname'];
 $email = $row['email'];
 $phone = $row['phone'];
 $bal = $row['balance'];
+$returns = $row['loan_returns'];
 $image = $row['image'];
+$bal_amount = $bal - $returns;
 ?>    
                 <tr>
 				<td><input id="optionsCheckbox" class="checkbox"  name="selector[]" type="checkbox" value="<?php echo $id; ?>"></td>
@@ -66,6 +70,9 @@ $query = mysqli_query($link, "SELECT * FROM systemset");
 $get_query = mysqli_fetch_array($query);
 ?>
 				<td><?php echo $get_query['currency'].number_format($bal,2,'.',','); ?></td>
+				<td><?php echo $returns; ?></td>
+				<td><?php echo $bal_amount; ?></td>
+				
 				<td align="center"><a href="add_to_borrower_list.php?id=<?php echo $id; ?>&&mid=<?php echo base64_encode("410"); ?>" class="btn btn-info btn-flat">Add to Borrower List</a></td>
 				</tr>
 <?php } } ?>

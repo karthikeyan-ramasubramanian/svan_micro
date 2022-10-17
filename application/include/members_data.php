@@ -36,6 +36,9 @@
 				  <th>KIC Number</th>
 				  <th>Address1</th>
 				  <th>Address2</th>
+				  <th>Loan Amount</th>
+				  <th>Loan Returns</th>
+				  <th>Balance</th>
                   <th>Actions</th>
                  </tr>
                 </thead>
@@ -62,6 +65,9 @@ $aadhaar = $row['aadhaar_number'];
 $kic_no = $row['kic_number'];
 $address1 = $row['addrs1'];
 $address2 = $row['addrs2'];
+$loan = $row['balance'];
+$returns = $row['loan_returns'];
+$balance = $loan - $returns;
 
 $status = $row['status'];
 
@@ -87,6 +93,9 @@ $pread= $get_check['pread'];
 				<td><?php echo $kic_no; ?></td>
 				<td><?php echo $address1; ?></td>
 				<td><?php echo $address2; ?></td>
+				<td><?php echo $loan; ?></td>
+				<td><?php echo $returns; ?></td>
+				<td><?php echo $balance; ?></td>
 				
 
 				<td align="center"><?php echo ($pupdate == '1') ? '<a href="transactionind.php?id='.$acc.'" class="btn btn-info btn-flat">Transactions</a>' : '<i class="fa fa-lock"></i>'; ?>

@@ -60,13 +60,13 @@ if(isset($_POST['save']))
 			$ln = $get_details['lname'];
 			$em = $get_details['email'];
 			$ph = $get_details['phone'];
-			$bal = $get_details['balance'];
+			$bal = $get_details['loan_returns'];
 			$total = number_format($amount + $bal,2,'.','');
 			if($amount < 0){
 				throw new UnexpectedValueException();
 			}
 			else{
-			$update = mysqli_query($link, "UPDATE borrowers SET balance = '$total' WHERE account = '$account'") or die (mysqli_error($link));
+			$update = mysqli_query($link, "UPDATE borrowers SET loan_returns = '$total' WHERE account = '$account'") or die (mysqli_error($link));
 			$insert = mysqli_query($link, "INSERT INTO transaction VALUES('','$txid','Deposit','$account','$fn','$ln','$em','$ph','$amount',NOW())") or die (mysqli_error($link));
 			if(!($update && $insert))
 			{
