@@ -143,21 +143,21 @@ else{
 <?php
 if(isset($_GET['mid']) && (trim($_GET['mid']) == base64_encode("407")))
 {
-	$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Deposit Amount'") or die ("Error" . mysqli_error($link));
+	$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Savings Account'") or die ("Error" . mysqli_error($link));
 	$get_check = mysqli_fetch_array($check);
 	$pcreate = $get_check['pcreate'];
 	$pread = $get_check['pread'];
 ?>		
-		<?php echo ($pread == 1) ? '<li><a href="deposit.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-users"></i>Deposit Amount</a></li>' : ''; ?> 	
+		<?php echo ($pread == 1) ? '<li><a href="deposit_group.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-users"></i>Deposit Amount</a></li>' : ''; ?> 	
 <?php
 }
 else{
-	$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Deposit Amount'") or die ("Error" . mysqli_error($link));
+	$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Savings Account'") or die ("Error" . mysqli_error($link));
 	$get_check = mysqli_fetch_array($check);
 	$pcreate = $get_check['pcreate'];
 	$pread = $get_check['pread'];
 ?>		
-		<?php echo ($pread == 1) ? '<li><a href="deposit.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-users"></i>Deposit Amount</a></li>' : ''; ?> 
+		<?php echo ($pread == 1) ? '<li><a href="deposit_group.php?id='.$_SESSION['tid'].'&&mid='.base64_encode("410").'"><i class="fa fa-users"></i>Deposit Amount</a></li>' : ''; ?> 
 <?php } ?>
 
 	

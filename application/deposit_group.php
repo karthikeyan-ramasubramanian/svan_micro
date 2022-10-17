@@ -1,4 +1,4 @@
-
+<?php include("include/header.php"); ?>
 <div class="wrapper">
 
 <?php include("include/top_bar.php"); ?>
@@ -23,7 +23,7 @@
     </section>
 	
     <section class="content">
-		<?php include("include/deposit_data.php"); ?>
+		<?php include("include/deposit_group_data.php"); ?>
 	</section>
 </div>
 

@@ -19,7 +19,10 @@
 				<select name="account"  class="form-control select2" required>
 					<option selected>Select Customer Account</option>
 <?php
-$search = mysqli_query($link, "SELECT * FROM borrowers");
+
+$group = $_SESSION['group'];
+$search = mysqli_query($link, "SELECT * FROM `borrowers` WHERE group_no = '$group'");
+
 while($get_search = mysqli_fetch_array($search))
 {
 ?>
