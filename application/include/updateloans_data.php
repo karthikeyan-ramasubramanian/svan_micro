@@ -186,9 +186,7 @@ $borrower = $row['borrower'];
                   <div class="col-sm-10">
                   <input name="teller" type="text" class="form-control" value="<?php echo $row['teller']; ?>" readonly>
                   </div>
-                  </div>
-				
-				
+                  </div>				
 				<div class="form-group">
                   	<label for="" class="col-sm-2 control-label" style="color:#009900">Remarks</label>
                   	<div class="col-sm-10">
