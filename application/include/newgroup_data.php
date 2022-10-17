@@ -27,40 +27,58 @@ $addrs2 = mysqli_real_escape_string($link, $_POST['addrs2']);
 
 // $status = "Pending";
 
-$image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-$image_name = addslashes($_FILES['image']['name']);
-$image_size = getimagesize($_FILES['image']['tmp_name']);
+// $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+// $image_name = addslashes($_FILES['image']['name']);
+// $image_size = getimagesize($_FILES['image']['tmp_name']);
 
-$target_dir = "../img/";
-$target_file = $target_dir.basename($_FILES["image"]["name"]);
-$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-$check = getimagesize($_FILES["image"]["tmp_name"]);
 
-if($check == false)
-{
-	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
-	echo '<br>';
-	echo'<span class="itext" style="color: #FF0000">Invalid file type</span>';
-}
 
-elseif($_FILES["image"]["size"] > 500000)
-{
-	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
-	echo '<br>';
-	echo'<span class="itext" style="color: #FF0000">Image must not more than 500KB!</span>';
-}
-elseif($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif")
-{
-	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
-	echo '<br>';
-	echo'<span class="itext" style="color: #FF0000">Sorry, only JPG, JPEG, PNG & GIF Files are allowed.</span>';
-}
-else{
-	
+// $check = getimagesize($_FILES["image"]["tmp_name"]);
+
+// if($check == false)
+// {
+// 	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+// 	echo '<br>';
+// 	echo'<span class="itext" style="color: #FF0000">Invalid file type</span>';
+// }
+
+// elseif($_FILES["image"]["size"] > 500000)
+// {
+// 	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+// 	echo '<br>';
+// 	echo'<span class="itext" style="color: #FF0000">Image must not more than 500KB!</span>';
+// }
+// elseif($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif")
+// {
+// 	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
+// 	echo '<br>';
+// 	echo'<span class="itext" style="color: #FF0000">Sorry, only JPG, JPEG, PNG & GIF Files are allowed.</span>';
+// }
+
 	$sourcepath = $_FILES["image"]["tmp_name"];
 	$targetpath = "../img/" . $_FILES["image"]["name"];
-	move_uploaded_file($sourcepath,$targetpath);
-	$location = "img/".$_FILES['image']['name'];
+	$target_dir = "../img/";
+$target_file = $target_dir.basename($_FILES["image"]["name"]);
+	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	$RandomAccountNumber = uniqid();
+	$imagefilename =  $RandomAccountNumber.".".$imageFileType;
+	
+	
+	$ProfilePicName = $_FILES["image"]["name"];
+	$ProfilePicType = $_FILES["image"]["type"];
+	$ProfilePicSize = $_FILES["image"]["size"];
+	$ProfilePicTemp = $_FILES["image"]["tmp_name"];
+	$ProfilePicError = $_FILES["image"]["error"];
+
+	move_uploaded_file($ProfilePicTemp, "../img/".$imagefilename);
+	
+	if($_FILES["image"]["name"]==NULL )
+	{
+		$location ="img/default.png";
+	}
+	else{
+		$location = "img/".$imagefilename;
+	}
 	$link = mysqli_connect('localhost','svan_user','1zgia8yCb*G#@lwz','svan_bank') or die('Unable to Connect to Database');
 	$duplicate=mysqli_query($link,"SELECT * FROM tbl_bgroup WHERE group_code='$Gcode'");
 	
@@ -69,25 +87,26 @@ else{
 			echo "<div class='alert alert-danger'> Group code Already Exists</div>";
 	}
 	else{
-	$insert = mysqli_query($link, "INSERT INTO tbl_bgroup VALUES('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2', '0')") or die (mysqli_error($link));
+	$insert = mysqli_query($link, "INSERT INTO tbl_bgroup VALUES('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2')") or die (mysqli_error($link));
 	if(!$insert)
 	{
 	echo "<div class='alert alert-info'>Unable to Insert Records.....Please try again later</div>";
 	}
 	else{
 	echo "<div class='alert alert-success'> Information Created Successfully!</div>";
+	echo '<meta http-equiv="refresh" content="2;url=newgroup.php?tid='.$id.'&&mid='.base64_encode("409").'">';
 	}
 	}
 	}
 	
-	}
+	
 	
     // $insert = mysqli_query($link, "INSERT INTO `tbl_bgroup` VALUES ('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2'") or die (mysqli_error($link));
 ?>			  				
 			<div class="form-group">
             <label for="" class="col-sm-2 control-label">Group Image</label>
 			<div class="col-sm-10">
-  		  			 <input type='file' name="image" onChange="readURL(this);" required>
+  		  			 <input type='file' name="image" onChange="readURL(this);" >
        				 <img id="blah"  src="../avtar/user2.png" alt="Image Here" height="100" width="100"/>
 			</div>
 			</div>

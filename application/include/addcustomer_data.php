@@ -92,6 +92,11 @@ if(isset($_POST['save']))
 	}
 	else{
 		$sourcepath = $_FILES["image"]["tmp_name"];
+		
+
+
+// move_uploaded_file($ProfilePicName,"Content/".$RandomAccountNumber);
+
 		$targetpath = "../img/" . $_FILES["image"]["name"];
 		move_uploaded_file($sourcepath,$targetpath);
 
