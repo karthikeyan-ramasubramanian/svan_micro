@@ -241,47 +241,6 @@ else{
 ?>
 
         <!-- ./col -->
-<?php
-$check = mysqli_query($link, "SELECT * FROM emp_permission WHERE tid = '".$_SESSION['tid']."' AND module_name = 'Payment'") or die ("Error" . mysqli_error($link));
-$get_check = mysqli_fetch_array($check);
-$pcreate = $get_check['pcreate'];
-$pread = $get_check['pread'];
-if($pcreate == '1' || $pread == '1')
-{
-?>
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
- 			
-			<h4>
-<?php 
-$select = mysqli_query($link, "SELECT SUM(amount_to_pay) FROM payments") or die (mysqli_error($link));
-while($row = mysqli_fetch_array($select))
-{
-$select1 = mysqli_query($link, "SELECT * FROM systemset") or die (mysqli_error($link));
-while($row1 = mysqli_fetch_array($select1))
-{
-$currency = $row1['currency'];
-echo $currency.number_format($row['SUM(amount_to_pay)'],2,".",",")."</b>";
-}
-}
-?>
-			</h4>
-              <p>Payment </p>
-            </div>
-            <div class="icon"><img height="80" width="80" src="../img/fair.png">
-              <i class=""></i>
-            </div>
-             <?php echo ($pread == 1) ? '<a href="listpayment.php?tid='.$_SESSION['tid'].'&&mid='.base64_encode("408").'" class="small-box-footer">More info<i class="fa fa-arrow-circle-right"></i></a>' : '<a href="#" class="small-box-footer">-------</a>'; ?>
-          </div>
-        </div>
-<?php
-}
-else{
-	echo '';
-}
-?>
         <!-- ./col -->	
 
 <?php
