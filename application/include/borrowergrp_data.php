@@ -30,6 +30,7 @@
 				  <th>Group Manager</th>
                   <th>Group Details </th>
                   <th>Actions</th>
+				  <th>Document</th>
                  </tr>
                 </thead>
                 <tbody>
@@ -67,6 +68,13 @@ $pread= $get_check['pread'];
 
 			
 				</td>
+				<td><?php
+$se = mysqli_query($link, "SELECT * FROM tbl_bgroup WHERE id = '$id'") or die (mysqli_error($link));
+while($gete = mysqli_fetch_array($se))
+{
+?>
+				<?php echo ($pread == '1') ? '<a href="'.$gete['doc_link'].'"><button type="button" class="btn btn-flat btn-success" download><i class="fa fa-download"></i>&nbsp;Download Document</button></a>' : ''; ?>
+<?php } ?></td>
     </tr>
 <?php } } ?>
              </tbody>
