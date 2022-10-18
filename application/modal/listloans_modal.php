@@ -33,6 +33,18 @@ $id = $row['id'];
 
                                     </div>
                                     </div>
+									<div class="form-group">
+                  <label for="" class="col-sm-2 control-label"style="color:#FF0000">Update Status</label>
+				  <div class="col-sm-10">
+				  <select name="upstatus" class="form-control" multiple="multiple" data-placeholder="Status" style="width: 100%;">
+									<!-----<select class="form-control select2 " multiple="multiple" type="text" name="Status" >------>
+											<option> </option>
+											<option value="Compeleted">Compeleted</option>
+											<option value="Pending">Pending</option>
+										 </select>
+
+                                    </div>
+                                    </div>
 								<div class="modal-footer">
 								<button type="submit" name="update_status" class="btn btn-flat btn-success"><i class="icon-save"></i>&nbsp;Update</button>
 								<button class="btn btn-flat btn-danger" data-dismiss="modal" aria-hidden="true"><i class="icon-remove icon-large"></i> Close</button>
@@ -41,11 +53,31 @@ $id = $row['id'];
 
 									<?php
 										 if (isset($_POST['update_status'])) {
-					
-									$Status_save = $_POST['Status'];
+											$Status_save = $_POST['Status'];
 									$UserID = $_POST['userid'];
-																		
-									mysqli_query($link,"UPDATE loan_info SET status='$Status_save' WHERE id = '$UserID'")or die(mysqli_error()); 
+									$upStatus_save = $_POST['upstatus'];
+									$UserID = $_POST['userid'];
+
+											if($Status_save != NULL)
+											{
+												mysqli_query($link,"UPDATE loan_info SET status='$Status_save' WHERE id = '$UserID'")or die(mysqli_error()); 
+
+											}elseif($upStatus_save != NULL)
+											{
+												mysqli_query($link,"UPDATE loan_info SET upstatus='$upStatus_save' WHERE id = '$UserID'")or die(mysqli_error()); 						
+
+
+											}
+											elseif($Status_save != NULL && $upStatus_save !=NULL)
+											{
+												mysqli_query($link,"UPDATE loan_info SET status='$Status_save' WHERE id = '$UserID'")or die(mysqli_error()); 
+												mysqli_query($link,"UPDATE loan_info SET upstatus='$upStatus_save' WHERE id = '$UserID'")or die(mysqli_error()); 						
+
+
+											}
+
+					
+									
 									echo "<script>window.location='listloans.php?id=".$_SESSION['tid']."'; </script>";
 									
 										

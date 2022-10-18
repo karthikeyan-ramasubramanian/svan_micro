@@ -218,6 +218,7 @@ if(isset($_POST['upload']))
 $id = $_GET['id'];
 $tid = $_SESSION['tid'];
 
+
 //upload random name/number
 	 $rd2 = mt_rand(1000,9999)."_File"; 
 	 
