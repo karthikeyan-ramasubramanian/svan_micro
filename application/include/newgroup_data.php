@@ -25,6 +25,31 @@ $Smgphone = mysqli_real_escape_string($link, $_POST['Smgphone']);
 $addrs1 = mysqli_real_escape_string($link, $_POST['addrs1']);
 $addrs2 = mysqli_real_escape_string($link, $_POST['addrs2']);
 
+
+//upload random name/number
+$rd2 = mt_rand(1000,9999)."_File"; 
+	 
+//Check that we have a file
+if((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0)) {
+//Check if the file is JPEG image and it's size is less than 350Kb
+$filename = basename($_FILES['uploaded_file']['name']);
+
+$ext = substr($filename, strrpos($filename, '.') + 1);
+
+if (($ext != "exe") && ($_FILES["uploaded_file"]["type"] != "application/x-msdownload"))  {
+//Determine the path to which we want to save this file      
+ //$newname = dirname(__FILE__).'/upload/'.$filename;
+ $newname="bup_document/".$rd2."_".$filename;      
+ //Check if the file with the same name is already exists on the server
+
+   //Attempt to move the uploaded file to it's new place
+   if ((move_uploaded_file($_FILES['uploaded_file']['tmp_name'],$newname))) {
+	   //successful upload
+	 // echo "It's done! The file has been saved as: ".$newname;		   
+}
+}
+}
+
 // $status = "Pending";
 
 // $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
@@ -87,7 +112,7 @@ $target_file = $target_dir.basename($_FILES["image"]["name"]);
 			echo "<div class='alert alert-danger'> Group code Already Exists</div>";
 	}
 	else{
-	$insert = mysqli_query($link, "INSERT INTO tbl_bgroup VALUES('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2')") or die (mysqli_error($link));
+	$insert = mysqli_query($link, "INSERT INTO tbl_bgroup VALUES('','$Gcode','$Gname','$Gmname','$Gsmname','$location','$Accno','$Mgphone','$Smgphone','$addrs1','$addrs2','0','$newname')") or die (mysqli_error($link));
 	if(!$insert)
 	{
 	echo "<div class='alert alert-info'>Unable to Insert Records.....Please try again later</div>";
@@ -183,6 +208,22 @@ $target_file = $target_dir.basename($_FILES["image"]["name"]);
                   	<label for="" class="col-sm-2 control-label" style="color:#009900">Address 2</label>
                   	<div class="col-sm-10"><textarea name="addrs2"  class="form-control" rows="4" cols="80"></textarea></div>
           	</div>
+			  <div class="text-center">
+           
+
+                Attachments
+Accepted file types <span style="color:#FF0000">jpg, gif, png, xls, xlsx, csv, doc, docx, pdf</span>
+				<div align="center">
+			 <input name="uploaded_file" align="center" type="file" class="btn btn-info">
+
+				</div>
+			 <div align="center">
+              <div class="box-footer">
+              </div>
+			  </div>
+			
+              </div>
+             
 			
 			
 			<!-- <div class="form-group">
