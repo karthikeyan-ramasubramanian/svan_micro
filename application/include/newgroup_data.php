@@ -211,8 +211,9 @@ $target_file = $target_dir.basename($_FILES["image"]["name"]);
 			  <div class="text-center">
            
 
-                Attachments
-Accepted file types <span style="color:#FF0000">jpg, gif, png, xls, xlsx, csv, doc, docx, pdf</span>
+               <h3>Attachments
+Accepted file types :</h3> <span style="color:#FF0000">jpg, gif, png, xls, xlsx, csv, doc, docx, pdf</span>
+<br/>
 				<div align="center">
 			 <input name="uploaded_file" align="center" type="file" class="btn btn-info">
 
